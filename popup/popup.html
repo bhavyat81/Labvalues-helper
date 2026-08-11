@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LabValues Helper</title>
+  <link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+  <div class="popup-container">
+    <!-- Header -->
+    <header class="popup-header">
+      <div class="popup-header-left">
+        <span class="popup-logo">🔬</span>
+        <div>
+          <h1 class="popup-title">LabValues Helper</h1>
+          <p class="popup-subtitle">Normal reference ranges</p>
+        </div>
+      </div>
+      <!-- Highlight toggle -->
+      <label class="toggle-switch" title="Enable/disable auto-highlighting on this page">
+        <input type="checkbox" id="highlight-toggle" checked />
+        <span class="toggle-slider"></span>
+      </label>
+    </header>
+
+    <!-- Search bar -->
+    <div class="search-section">
+      <div class="search-wrapper">
+        <span class="search-icon">🔍</span>
+        <input
+          type="text"
+          id="search-input"
+          class="search-input"
+          placeholder="Search lab value (e.g. HbA1c, sodium, WBC)…"
+          autocomplete="off"
+          spellcheck="false"
+        />
+        <button id="clear-search" class="clear-btn" title="Clear" style="display:none">✕</button>
+      </div>
+    </div>
+
+    <!-- Search results -->
+    <div id="search-results" class="search-results" style="display:none"></div>
+
+    <!-- Detected on page -->
+    <div id="page-labs-section" class="page-labs-section">
+      <h2 class="section-title">Found on this page</h2>
+      <div id="page-labs-list" class="page-labs-list">
+        <p class="empty-state">Scanning page…</p>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="popup-footer">
+      <button id="open-reference" class="reference-btn">📋 Full Reference Table</button>
+      <p class="disclaimer">For educational purposes only.</p>
+    </footer>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

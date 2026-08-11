@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <rect width="128" height="128" rx="24" fill="#1d4ed8"/>
+  <rect x="16" y="48" width="96" height="8" rx="4" fill="white" opacity="0.3"/>
+  <rect x="16" y="64" width="96" height="8" rx="4" fill="white" opacity="0.3"/>
+  <rect x="16" y="80" width="96" height="8" rx="4" fill="white" opacity="0.3"/>
+  <!-- Beaker/flask shape -->
+  <path d="M48 20 L48 56 L28 88 Q24 96 32 100 L96 100 Q104 96 100 88 L80 56 L80 20 Z"
+        fill="none" stroke="white" stroke-width="5" stroke-linejoin="round"/>
+  <path d="M40 68 L88 68 L96 82 Q100 90 94 94 L34 94 Q28 90 32 82 Z"
+        fill="rgba(255,255,255,0.25)"/>
+  <!-- Lv text -->
+  <text x="64" y="88" font-family="Arial Black, sans-serif" font-size="26"
+        font-weight="900" fill="white" text-anchor="middle" dominant-baseline="middle">Lv</text>
+</svg>
