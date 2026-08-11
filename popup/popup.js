@@ -1,165 +1,220 @@
-/**
- * popup.js — LabValues Helper popup script
- * Handles search, page-detected labs list, and highlight toggle.
- */
-
 'use strict';
 
 let labData = [];
+let currentUnitSystem = 'conventional';
+let currentTab = 'page';
+let searchDebounce = null;
 
-// ── DOM refs ───────────────────────────────────────────────────────────────
+const tabBtns = document.querySelectorAll('.tab-btn');
+const tabContents = document.querySelectorAll('.tab-content');
+const pageLabsList = document.getElementById('page-labs-list');
+const rescanBtn = document.getElementById('rescan-btn');
 const searchInput = document.getElementById('search-input');
-const clearBtn    = document.getElementById('clear-search');
+const clearSearchBtn = document.getElementById('clear-search');
 const searchResults = document.getElementById('search-results');
-const pageLabsList  = document.getElementById('page-labs-list');
 const highlightToggle = document.getElementById('highlight-toggle');
-const openRefBtn    = document.getElementById('open-reference');
+const tooltipToggle = document.getElementById('tooltip-toggle');
+const unitRadios = document.querySelectorAll('input[name="unitSystem"]');
+const openRefBtn = document.getElementById('open-reference');
 
-// ── Init ───────────────────────────────────────────────────────────────────
 async function init() {
-  // Load lab data
   const url = chrome.runtime.getURL('data/lab-values.json');
   const res = await fetch(url);
   labData = await res.json();
 
-  // Restore highlight toggle state
-  const stored = await chrome.storage.local.get(['highlightEnabled']);
-  const enabled = stored.highlightEnabled !== undefined ? stored.highlightEnabled : true;
-  highlightToggle.checked = enabled;
+  const stored = await chrome.storage.local.get([
+    'lastTab',
+    'settings.unitSystem',
+    'settings.autoHighlight',
+    'settings.showTooltips'
+  ]);
 
-  // Load page-detected labs
+  currentUnitSystem = stored['settings.unitSystem'] || 'conventional';
+  const autoHighlight = stored['settings.autoHighlight'] !== undefined ? stored['settings.autoHighlight'] : true;
+  const showTooltips = stored['settings.showTooltips'] !== undefined ? stored['settings.showTooltips'] : true;
+
+  unitRadios.forEach(radio => {
+    radio.checked = radio.value === currentUnitSystem;
+  });
+  highlightToggle.checked = autoHighlight;
+  tooltipToggle.checked = showTooltips;
+
+  switchTab(stored.lastTab || 'page');
   loadPageLabs();
 }
 
-// ── Search ─────────────────────────────────────────────────────────────────
-searchInput.addEventListener('input', () => {
-  const query = searchInput.value.trim().toLowerCase();
-  clearBtn.style.display = query ? 'block' : 'none';
-
-  if (!query) {
-    searchResults.style.display = 'none';
-    document.getElementById('page-labs-section').style.display = 'flex';
-    return;
-  }
-
-  const matches = labData.filter(lab => {
-    if (lab.name.toLowerCase().includes(query)) return true;
-    if (lab.id.toLowerCase().includes(query)) return true;
-    return lab.aliases.some(a => a.toLowerCase().includes(query));
-  });
-
-  renderSearchResults(matches, query);
-  searchResults.style.display = 'block';
-  document.getElementById('page-labs-section').style.display = 'none';
-});
-
-clearBtn.addEventListener('click', () => {
-  searchInput.value = '';
-  clearBtn.style.display = 'none';
-  searchResults.style.display = 'none';
-  document.getElementById('page-labs-section').style.display = 'flex';
-  searchInput.focus();
-});
-
-function renderSearchResults(labs, query) {
-  if (labs.length === 0) {
-    searchResults.innerHTML = '<p class="empty-state">No matching lab values found.</p>';
-    return;
-  }
-  searchResults.innerHTML = labs.map(lab => buildLabCardHtml(lab)).join('');
+function switchTab(tabId) {
+  currentTab = tabId;
+  tabBtns.forEach(btn => btn.classList.toggle('active', btn.dataset.tab === tabId));
+  tabContents.forEach(content => content.classList.toggle('active', content.id === `tab-${tabId}`));
+  chrome.storage.local.set({ lastTab: tabId });
 }
 
-// ── Page-detected labs ─────────────────────────────────────────────────────
+tabBtns.forEach(btn => {
+  btn.addEventListener('click', () => switchTab(btn.dataset.tab));
+});
+
 function loadPageLabs() {
-  chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+  pageLabsList.innerHTML = '<p class="empty-state">Scanning page…</p>';
+  chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
     if (!tabs[0]?.id) {
       pageLabsList.innerHTML = '<p class="empty-state">No active tab found.</p>';
       return;
     }
 
-    chrome.tabs.sendMessage(tabs[0].id, { action: 'getDetectedLabs' }, (response) => {
+    chrome.tabs.sendMessage(tabs[0].id, { action: 'getDetectedLabs' }, response => {
       if (chrome.runtime.lastError || !response) {
-        pageLabsList.innerHTML = '<p class="empty-state">Could not read page content. Try refreshing.</p>';
+        pageLabsList.innerHTML = '<p class="empty-state">Could not read page. Try refreshing the page first.</p>';
         return;
       }
 
       const labs = response.labs || [];
       if (labs.length === 0) {
-        pageLabsList.innerHTML = '<p class="empty-state">No lab values detected on this page.</p>';
-      } else {
-        pageLabsList.innerHTML = labs.map(lab => buildLabCardHtml(lab)).join('');
+        pageLabsList.innerHTML = '<p class="empty-state">No lab values detected on this page.<br>Try Search mode or open a medical article.</p>';
+        return;
       }
+
+      pageLabsList.innerHTML = labs.map(buildLabCardHtml).join('');
     });
   });
 }
 
-// ── Highlight toggle ───────────────────────────────────────────────────────
+rescanBtn.addEventListener('click', loadPageLabs);
+
+searchInput.addEventListener('input', () => {
+  const query = searchInput.value.trim();
+  clearSearchBtn.style.display = query ? 'block' : 'none';
+  clearTimeout(searchDebounce);
+  searchDebounce = setTimeout(() => runSearch(query), 150);
+});
+
+clearSearchBtn.addEventListener('click', () => {
+  searchInput.value = '';
+  clearSearchBtn.style.display = 'none';
+  searchResults.innerHTML = '<p class="empty-state muted">Start typing a lab name (e.g., HbA1c, sodium, WBC)…</p>';
+  searchInput.focus();
+});
+
+function runSearch(query) {
+  if (!query) {
+    searchResults.innerHTML = '<p class="empty-state muted">Start typing a lab name (e.g., HbA1c, sodium, WBC)…</p>';
+    return;
+  }
+
+  const lower = query.toLowerCase();
+  const matches = labData.filter(lab =>
+    lab.name.toLowerCase().includes(lower) ||
+    lab.id.toLowerCase().includes(lower) ||
+    (lab.aliases || []).some(alias => alias.toLowerCase().includes(lower))
+  );
+
+  if (matches.length === 0) {
+    searchResults.innerHTML = '<p class="empty-state">No matching lab value found.</p>';
+    return;
+  }
+
+  searchResults.innerHTML = matches.map(buildLabCardHtml).join('');
+}
+
+unitRadios.forEach(radio => {
+  radio.addEventListener('change', () => {
+    if (!radio.checked) {
+      return;
+    }
+
+    currentUnitSystem = radio.value;
+    chrome.storage.local.set({ 'settings.unitSystem': currentUnitSystem });
+    chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
+      if (tabs[0]?.id) {
+        chrome.tabs.sendMessage(tabs[0].id, {
+          action: 'settingsChanged',
+          settings: { unitSystem: currentUnitSystem }
+        });
+      }
+    });
+
+    if (currentTab === 'page') {
+      loadPageLabs();
+    }
+    runSearch(searchInput.value.trim());
+  });
+});
+
 highlightToggle.addEventListener('change', () => {
   const enabled = highlightToggle.checked;
-  chrome.storage.local.set({ highlightEnabled: enabled });
+  chrome.storage.local.set({ 'settings.autoHighlight': enabled });
+  chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
+    if (!tabs[0]?.id) {
+      return;
+    }
+    chrome.tabs.sendMessage(tabs[0].id, { action: 'setHighlight', enabled });
+  });
+});
 
-  // Notify content script on current tab
-  chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-    if (!tabs[0]?.id) return;
+tooltipToggle.addEventListener('change', () => {
+  const enabled = tooltipToggle.checked;
+  chrome.storage.local.set({ 'settings.showTooltips': enabled });
+  chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
+    if (!tabs[0]?.id) {
+      return;
+    }
     chrome.tabs.sendMessage(tabs[0].id, {
-      action: 'setHighlight',
-      enabled
+      action: 'settingsChanged',
+      settings: { showTooltips: enabled }
     });
   });
 });
 
-// ── Open full reference page ───────────────────────────────────────────────
 openRefBtn.addEventListener('click', () => {
   const url = chrome.runtime.getURL('reference/reference.html');
   chrome.tabs.create({ url });
 });
 
-// ── Lab card HTML builder ──────────────────────────────────────────────────
+function getRanges(lab) {
+  if (lab.ranges && typeof lab.ranges === 'object' && !Array.isArray(lab.ranges)) {
+    return currentUnitSystem === 'si' && lab.ranges.si ? lab.ranges.si : lab.ranges.conventional;
+  }
+  return lab.ranges || [];
+}
+
 function buildLabCardHtml(lab) {
-  const rangesHtml = lab.ranges.map(r => {
-    let valueStr;
-    if (r.low === null || (r.low === 0 && r.high === 0)) {
-      valueStr = r.high !== null ? `&lt; ${r.high} ${escHtml(r.unit)}` : 'Negative';
-    } else if (r.high === null) {
-      valueStr = `&ge; ${r.low} ${escHtml(r.unit)}`;
-    } else {
-      valueStr = `${r.low}–${r.high} ${escHtml(r.unit)}`;
-    }
-    return `
-      <div class="range-row">
-        <span class="range-population">${escHtml(r.population)}</span>
-        <span class="range-value">${valueStr}</span>
-      </div>`;
+  const rangesHtml = getRanges(lab).map(range => {
+    return `<div class="range-row"><span class="range-pop">${escHtml(range.population)}</span><span class="range-val">${formatRangeValue(range)}</span></div>`;
   }).join('');
 
-  const siHtml = lab.siRange
-    ? `<div class="lab-card-si"><strong>SI:</strong> ${escHtml(lab.siRange)}</div>`
-    : '';
-
-  const notesHtml = lab.notes
-    ? `<div class="lab-card-notes">${escHtml(lab.notes)}</div>`
-    : '';
+  const notesHtml = lab.notes ? `<div class="card-notes">${escHtml(lab.notes)}</div>` : '';
 
   return `
     <div class="lab-card">
-      <div class="lab-card-header">
-        <span class="lab-card-name">${escHtml(lab.name)}</span>
-        <span class="lab-card-category">${escHtml(lab.category)}</span>
+      <div class="card-header">
+        <strong class="card-name">${escHtml(lab.name)}</strong>
+        <span class="card-category">${escHtml(lab.category)}</span>
       </div>
-      <div class="lab-card-ranges">${rangesHtml}</div>
-      ${siHtml}
+      <div class="card-ranges">${rangesHtml}</div>
       ${notesHtml}
     </div>`;
 }
 
-function escHtml(str) {
-  if (str === null || str === undefined) return '';
-  return String(str)
+function escHtml(value) {
+  if (value == null) {
+    return '';
+  }
+  return String(value)
     .replace(/&/g, '&amp;')
     .replace(/</g, '&lt;')
     .replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;');
 }
 
-// ── Start ──────────────────────────────────────────────────────────────────
+function formatRangeValue(range) {
+  const unit = escHtml(range.unit);
+  if (range.low === null || range.low === undefined) {
+    return range.high !== null && range.high !== undefined ? `&lt; ${escHtml(range.high)} ${unit}` : 'Negative';
+  }
+  if (range.high === null || range.high === undefined) {
+    return `&ge; ${escHtml(range.low)} ${unit}`;
+  }
+  return `${escHtml(range.low)}–${escHtml(range.high)} ${unit}`;
+}
+
 init().catch(err => console.warn('[LabValues Helper] Popup error:', err));

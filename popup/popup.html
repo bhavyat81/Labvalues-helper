@@ -1,63 +1,96 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
   <title>LabValues Helper</title>
-  <link rel="stylesheet" href="popup.css" />
+  <link rel="stylesheet" href="popup.css"/>
 </head>
 <body>
   <div class="popup-container">
-    <!-- Header -->
     <header class="popup-header">
-      <div class="popup-header-left">
-        <span class="popup-logo">🔬</span>
-        <div>
-          <h1 class="popup-title">LabValues Helper</h1>
-          <p class="popup-subtitle">Normal reference ranges</p>
-        </div>
-      </div>
-      <!-- Highlight toggle -->
-      <label class="toggle-switch" title="Enable/disable auto-highlighting on this page">
-        <input type="checkbox" id="highlight-toggle" checked />
-        <span class="toggle-slider"></span>
-      </label>
+      <span class="popup-logo">🔬</span>
+      <h1 class="popup-title">LabValues Helper</h1>
     </header>
 
-    <!-- Search bar -->
-    <div class="search-section">
-      <div class="search-wrapper">
-        <span class="search-icon">🔍</span>
-        <input
-          type="text"
-          id="search-input"
-          class="search-input"
-          placeholder="Search lab value (e.g. HbA1c, sodium, WBC)…"
-          autocomplete="off"
-          spellcheck="false"
-        />
-        <button id="clear-search" class="clear-btn" title="Clear" style="display:none">✕</button>
+    <nav class="tab-nav">
+      <button class="tab-btn active" data-tab="page">📄 Page</button>
+      <button class="tab-btn" data-tab="search">🔍 Search</button>
+      <button class="tab-btn" data-tab="settings">⚙️ Settings</button>
+    </nav>
+
+    <div class="tab-content active" id="tab-page">
+      <div class="tab-toolbar">
+        <span class="tab-desc">Lab values detected on this page</span>
+        <button id="rescan-btn" class="action-btn">🔄 Rescan</button>
       </div>
-    </div>
-
-    <!-- Search results -->
-    <div id="search-results" class="search-results" style="display:none"></div>
-
-    <!-- Detected on page -->
-    <div id="page-labs-section" class="page-labs-section">
-      <h2 class="section-title">Found on this page</h2>
-      <div id="page-labs-list" class="page-labs-list">
+      <div id="page-labs-list" class="cards-list">
         <p class="empty-state">Scanning page…</p>
       </div>
     </div>
 
-    <!-- Footer -->
-    <footer class="popup-footer">
-      <button id="open-reference" class="reference-btn">📋 Full Reference Table</button>
-      <p class="disclaimer">For educational purposes only.</p>
-    </footer>
-  </div>
+    <div class="tab-content" id="tab-search">
+      <div class="search-wrapper">
+        <span class="search-icon">🔍</span>
+        <input type="text" id="search-input" class="search-input" placeholder="Search lab name (e.g. HbA1c, sodium…)" autocomplete="off" spellcheck="false"/>
+        <button id="clear-search" class="clear-btn" style="display:none">✕</button>
+      </div>
+      <div id="search-results" class="cards-list">
+        <p class="empty-state muted">Start typing a lab name (e.g., HbA1c, sodium, WBC)…</p>
+      </div>
+    </div>
 
+    <div class="tab-content" id="tab-settings">
+      <div class="settings-section">
+        <label class="settings-label">Unit System</label>
+        <div class="segmented-control">
+          <label class="seg-option">
+            <input type="radio" name="unitSystem" value="conventional" checked/>
+            <span>Conventional (US)</span>
+          </label>
+          <label class="seg-option">
+            <input type="radio" name="unitSystem" value="si"/>
+            <span>SI (International)</span>
+          </label>
+        </div>
+        <p class="settings-hint">Conventional: mg/dL, g/dL · SI: mmol/L, g/L</p>
+      </div>
+
+      <div class="settings-section settings-inline">
+        <div>
+          <label class="settings-label" for="highlight-toggle">Auto-highlight on pages</label>
+          <p class="settings-hint">Underline lab terms found on the page</p>
+        </div>
+        <label class="toggle-switch">
+          <input type="checkbox" id="highlight-toggle" checked/>
+          <span class="toggle-slider"></span>
+        </label>
+      </div>
+
+      <div class="settings-section settings-inline">
+        <div>
+          <label class="settings-label" for="tooltip-toggle">Show tooltips on hover</label>
+          <p class="settings-hint">Show reference range popup when hovering over highlighted terms</p>
+        </div>
+        <label class="toggle-switch">
+          <input type="checkbox" id="tooltip-toggle" checked/>
+          <span class="toggle-slider"></span>
+        </label>
+      </div>
+
+      <div class="settings-section">
+        <button id="open-reference" class="reference-btn">📋 View full reference list</button>
+      </div>
+
+      <details class="about-details">
+        <summary>About / Disclaimer</summary>
+        <div class="about-body">
+          <p>LabValues Helper v1.1.0</p>
+          <p>For educational purposes only. Not a substitute for clinical judgment. Reference ranges may vary by laboratory.</p>
+        </div>
+      </details>
+    </div>
+  </div>
   <script src="popup.js"></script>
 </body>
 </html>

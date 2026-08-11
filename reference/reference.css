@@ -80,6 +80,32 @@ body {
   background: rgba(255,255,255,0.25);
 }
 
+
+.unit-toggle-bar {
+  background: #fff;
+  border-bottom: 1px solid #e2e8f0;
+  margin: 0 -16px;
+  padding: 10px 16px;
+  padding-left: calc(50% - 550px + 16px);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  color: #475569;
+  font-size: 13px;
+}
+
+.unit-toggle-bar label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+}
+
+.unit-toggle-bar input {
+  accent-color: #1d4ed8;
+}
+
 /* ── Stats bar ─────────────────────────────────────────────────────────── */
 .stats-bar {
   background: #fff;
@@ -270,6 +296,12 @@ body {
   max-width: 260px;
 }
 
+.td-conversion {
+  margin-top: 8px;
+  color: #64748b;
+  font-size: 11px;
+}
+
 /* ── No results ────────────────────────────────────────────────────────── */
 .no-results {
   text-align: center;
@@ -296,7 +328,7 @@ body {
 /* ── Responsive ────────────────────────────────────────────────────────── */
 @media (max-width: 700px) {
   .ref-title { font-size: 18px; }
+  .unit-toggle-bar, .stats-bar, .category-nav { padding-left: 16px; }
   .lab-table td, .lab-table thead th { padding: 8px 10px; }
-  .td-si, .td-notes { display: none; }
-  .td-aliases { display: none; }
+  .td-notes, .td-aliases { display: none; }
 }
