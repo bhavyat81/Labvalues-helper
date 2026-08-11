@@ -1,0 +1,302 @@
+/* reference.css — LabValues Helper full reference page */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+  font-size: 14px;
+  color: #1e293b;
+  background: #f1f5f9;
+  min-height: 100vh;
+}
+
+/* ── Page wrapper ──────────────────────────────────────────────────────── */
+.page-wrapper {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 16px 40px;
+}
+
+/* ── Header ────────────────────────────────────────────────────────────── */
+.ref-header {
+  background: linear-gradient(135deg, #1e3a8a 0%, #1d4ed8 60%, #3b82f6 100%);
+  color: #fff;
+  padding: 0 16px;
+  margin: 0 -16px 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+.ref-header-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 0;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.ref-header-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.ref-logo { font-size: 32px; line-height: 1; }
+
+.ref-title {
+  font-size: 22px;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.ref-subtitle {
+  font-size: 13px;
+  opacity: 0.8;
+  margin-top: 2px;
+}
+
+.ref-header-right { flex: 1; min-width: 200px; max-width: 380px; }
+
+.ref-search {
+  width: 100%;
+  padding: 9px 14px;
+  border: 2px solid rgba(255,255,255,0.3);
+  border-radius: 8px;
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.15s, background 0.15s;
+}
+
+.ref-search::placeholder { color: rgba(255,255,255,0.6); }
+.ref-search:focus {
+  border-color: rgba(255,255,255,0.8);
+  background: rgba(255,255,255,0.25);
+}
+
+/* ── Stats bar ─────────────────────────────────────────────────────────── */
+.stats-bar {
+  background: #fff;
+  border-bottom: 1px solid #e2e8f0;
+  padding: 8px 0;
+  font-size: 12px;
+  color: #64748b;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 -16px;
+  padding-left: calc(50% - 550px + 16px);
+  padding-right: 16px;
+}
+
+.stats-divider { color: #cbd5e1; }
+
+/* ── Category nav ──────────────────────────────────────────────────────── */
+.category-nav {
+  background: #fff;
+  border-bottom: 1px solid #e2e8f0;
+  padding: 8px 0;
+  margin: 0 -16px;
+  padding-left: calc(50% - 550px + 16px);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  overflow-x: auto;
+  flex-wrap: nowrap;
+  position: sticky;
+  top: 70px;
+  z-index: 90;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+}
+
+.cat-btn {
+  border: 1px solid #e2e8f0;
+  background: #f8fafc;
+  border-radius: 20px;
+  padding: 4px 12px;
+  font-size: 12px;
+  cursor: pointer;
+  color: #475569;
+  white-space: nowrap;
+  transition: all 0.15s;
+  font-weight: 500;
+}
+
+.cat-btn:hover { background: #eff6ff; border-color: #bfdbfe; color: #1d4ed8; }
+
+.cat-btn.active {
+  background: #1d4ed8;
+  border-color: #1d4ed8;
+  color: #fff;
+  font-weight: 600;
+}
+
+/* ── Main content ──────────────────────────────────────────────────────── */
+.ref-main {
+  padding-top: 24px;
+}
+
+.loading-state {
+  text-align: center;
+  color: #94a3b8;
+  padding: 40px;
+  font-size: 16px;
+}
+
+/* ── Category section ──────────────────────────────────────────────────── */
+.category-section {
+  margin-bottom: 32px;
+}
+
+.category-section[hidden] { display: none; }
+
+.category-heading {
+  font-size: 16px;
+  font-weight: 700;
+  color: #1d4ed8;
+  margin-bottom: 12px;
+  padding-bottom: 6px;
+  border-bottom: 2px solid #bfdbfe;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.category-count {
+  font-size: 12px;
+  font-weight: 500;
+  color: #64748b;
+  background: #f1f5f9;
+  border-radius: 10px;
+  padding: 1px 8px;
+}
+
+/* ── Lab table ─────────────────────────────────────────────────────────── */
+.lab-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+}
+
+.lab-table thead {
+  background: #eff6ff;
+}
+
+.lab-table thead th {
+  padding: 10px 14px;
+  font-size: 11px;
+  font-weight: 700;
+  color: #1d4ed8;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  text-align: left;
+  border-bottom: 2px solid #bfdbfe;
+}
+
+.lab-table tbody tr {
+  border-bottom: 1px solid #f1f5f9;
+  transition: background 0.1s;
+}
+
+.lab-table tbody tr:last-child { border-bottom: none; }
+.lab-table tbody tr:hover { background: #f8fafc; }
+
+.lab-table td {
+  padding: 10px 14px;
+  vertical-align: top;
+  font-size: 13px;
+}
+
+.td-name {
+  font-weight: 700;
+  color: #0f172a;
+  min-width: 140px;
+}
+
+.td-aliases {
+  color: #64748b;
+  font-size: 11.5px;
+  min-width: 130px;
+}
+
+.td-aliases span {
+  display: inline-block;
+  background: #f1f5f9;
+  border-radius: 3px;
+  padding: 1px 5px;
+  margin: 1px 2px 1px 0;
+  font-size: 11px;
+  color: #475569;
+}
+
+.td-ranges { min-width: 180px; }
+
+.td-range-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 1px 0;
+}
+
+.td-population { color: #64748b; font-size: 12px; flex: 1; }
+
+.td-value {
+  font-weight: 600;
+  font-size: 12px;
+  color: #0f172a;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.td-si {
+  font-size: 11.5px;
+  color: #64748b;
+  min-width: 160px;
+}
+
+.td-notes {
+  font-size: 11.5px;
+  color: #475569;
+  line-height: 1.5;
+  max-width: 260px;
+}
+
+/* ── No results ────────────────────────────────────────────────────────── */
+.no-results {
+  text-align: center;
+  padding: 40px;
+  color: #94a3b8;
+  font-size: 14px;
+}
+
+/* ── Footer ────────────────────────────────────────────────────────────── */
+.ref-footer {
+  margin-top: 40px;
+  padding: 16px;
+  background: #fff;
+  border-radius: 10px;
+  border: 1px solid #e2e8f0;
+  font-size: 12px;
+  color: #64748b;
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+/* ── Responsive ────────────────────────────────────────────────────────── */
+@media (max-width: 700px) {
+  .ref-title { font-size: 18px; }
+  .lab-table td, .lab-table thead th { padding: 8px 10px; }
+  .td-si, .td-notes { display: none; }
+  .td-aliases { display: none; }
+}

@@ -1,0 +1,126 @@
+/* LabValues Helper — content.css
+   Highlight + tooltip styles injected into host pages */
+
+/* Highlighted lab term */
+.lvh-highlight {
+  border-bottom: 2px dotted #3b82f6;
+  cursor: help;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  padding: 0;
+  margin: 0;
+  display: inline;
+  border-radius: 0;
+  text-decoration: none;
+}
+
+.lvh-highlight:hover {
+  background: rgba(59, 130, 246, 0.1);
+  border-radius: 2px;
+}
+
+/* Tooltip container */
+#lvh-tooltip {
+  position: fixed;
+  z-index: 2147483647;
+  max-width: 340px;
+  min-width: 220px;
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 13px;
+  color: #1e293b;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+  padding: 0;
+  overflow: hidden;
+}
+
+#lvh-tooltip.lvh-visible {
+  opacity: 1;
+}
+
+/* Tooltip header */
+.lvh-tooltip-header {
+  background: linear-gradient(135deg, #1d4ed8, #3b82f6);
+  color: #fff;
+  padding: 10px 14px 8px;
+}
+
+.lvh-tooltip-name {
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.2;
+  margin: 0 0 2px;
+}
+
+.lvh-tooltip-category {
+  font-size: 11px;
+  opacity: 0.85;
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Tooltip body */
+.lvh-tooltip-body {
+  padding: 10px 14px;
+}
+
+.lvh-range-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 3px 0;
+  border-bottom: 1px solid #f1f5f9;
+  gap: 8px;
+}
+
+.lvh-range-row:last-child {
+  border-bottom: none;
+}
+
+.lvh-range-population {
+  color: #64748b;
+  font-size: 12px;
+  flex: 1;
+  min-width: 0;
+}
+
+.lvh-range-value {
+  font-weight: 600;
+  color: #1e293b;
+  font-size: 12px;
+  text-align: right;
+  white-space: nowrap;
+}
+
+/* SI range row */
+.lvh-si-row {
+  margin-top: 6px;
+  padding-top: 6px;
+  border-top: 1px solid #e2e8f0;
+  font-size: 11px;
+  color: #64748b;
+}
+
+.lvh-si-label {
+  font-weight: 600;
+  margin-right: 4px;
+}
+
+/* Notes */
+.lvh-notes {
+  margin-top: 6px;
+  padding: 6px 8px;
+  background: #f8fafc;
+  border-radius: 6px;
+  font-size: 11px;
+  color: #475569;
+  line-height: 1.4;
+  border-left: 3px solid #3b82f6;
+}
