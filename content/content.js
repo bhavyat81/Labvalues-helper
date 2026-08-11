@@ -6,41 +6,44 @@
 
 'use strict';
 
-// ── State ──────────────────────────────────────────────────────────────────
-let labData = [];           // Loaded from data/lab-values.json
-let masterRegex = null;     // Combined regex for all lab names + aliases
-let aliasToLab = {};        // Maps lowercase alias → lab entry
-let highlightEnabled = true;
-let detectedLabs = new Set(); // Lab IDs found on page
+let labData = [];
+let masterRegex = null;
+let aliasToLab = {};
+let unitSystem = 'conventional';
+let autoHighlight = true;
+let showTooltips = true;
+let detectedLabs = new Set();
 let tooltip = null;
 let observer = null;
 let isProcessing = false;
 
-// ── Tags to skip when scanning ─────────────────────────────────────────────
 const SKIP_TAGS = new Set([
   'SCRIPT', 'STYLE', 'NOSCRIPT', 'IFRAME', 'TEXTAREA', 'INPUT',
   'SELECT', 'BUTTON', 'HEAD', 'META', 'LINK', 'TITLE', 'CODE',
   'PRE', 'SVG', 'MATH'
 ]);
 
-// ── Init ───────────────────────────────────────────────────────────────────
 async function init() {
   try {
-    // Load persisted highlight toggle
-    const stored = await chrome.storage.local.get(['highlightEnabled']);
-    if (stored.highlightEnabled !== undefined) {
-      highlightEnabled = stored.highlightEnabled;
-    }
+    const stored = await chrome.storage.local.get([
+      'settings.unitSystem',
+      'settings.autoHighlight',
+      'settings.showTooltips',
+      'highlightEnabled'
+    ]);
 
-    if (!highlightEnabled) return;
+    unitSystem = stored['settings.unitSystem'] || 'conventional';
+    autoHighlight = stored['settings.autoHighlight'] !== undefined
+      ? stored['settings.autoHighlight']
+      : (stored.highlightEnabled !== undefined ? stored.highlightEnabled : true);
+    showTooltips = stored['settings.showTooltips'] !== undefined ? stored['settings.showTooltips'] : true;
 
-    // Fetch lab data
     const url = chrome.runtime.getURL('data/lab-values.json');
     const response = await fetch(url);
     labData = await response.json();
 
     buildRegex();
-    createTooltip();
+    ensureTooltip();
     scanDocument();
     startObserver();
   } catch (err) {
@@ -48,68 +51,61 @@ async function init() {
   }
 }
 
-// ── Build master regex + alias map ─────────────────────────────────────────
 function buildRegex() {
   const terms = [];
+  aliasToLab = {};
 
   labData.forEach(lab => {
-    const allNames = [lab.name, ...lab.aliases];
-    allNames.forEach(alias => {
-      const lower = alias.toLowerCase();
-      // Map alias → lab entry (keep longest alias for a given lab)
-      aliasToLab[lower] = lab;
-      terms.push(alias);
+    const names = [lab.name, ...(lab.aliases || [])];
+    names.forEach(name => {
+      const normalized = name.toLowerCase();
+      aliasToLab[normalized] = lab;
+      terms.push(name);
     });
   });
 
-  // Sort longest-first to avoid partial-match issues (e.g. "HbA1c" before "Hb")
   terms.sort((a, b) => b.length - a.length);
-
-  // Build regex: case-insensitive, word-boundary delimited
-  const escaped = terms.map(t => escapeRegex(t));
-  masterRegex = new RegExp(`\\b(${escaped.join('|')})\\b`, 'gi');
+  masterRegex = new RegExp(`\\b(${terms.map(escapeRegex).join('|')})\\b`, 'gi');
 }
 
-function escapeRegex(str) {
-  // Escape regex special characters
-  return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+function escapeRegex(value) {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
 
-// ── Tooltip creation ───────────────────────────────────────────────────────
-function createTooltip() {
+function ensureTooltip() {
+  if (tooltip) {
+    return;
+  }
+
   tooltip = document.createElement('div');
   tooltip.id = 'lvh-tooltip';
   tooltip.setAttribute('aria-live', 'polite');
   document.body.appendChild(tooltip);
 }
 
-function showTooltip(lab, anchorRect) {
-  if (!tooltip) return;
+function getRanges(lab) {
+  if (lab.ranges && typeof lab.ranges === 'object' && !Array.isArray(lab.ranges)) {
+    return unitSystem === 'si' && lab.ranges.si ? lab.ranges.si : lab.ranges.conventional;
+  }
+  return lab.ranges || [];
+}
 
-  // Build range rows HTML
-  const rangesHtml = lab.ranges.map(r => {
-    let valueStr;
-    if (r.low === null || r.low === 0 && r.high === 0) {
-      valueStr = r.high !== null ? `< ${r.high} ${r.unit}` : 'Negative';
-    } else if (r.high === null) {
-      valueStr = `≥ ${r.low} ${r.unit}`;
-    } else {
-      valueStr = `${r.low}–${r.high} ${r.unit}`;
-    }
+function showTooltip(lab, anchorRect) {
+  if (!showTooltips) {
+    return;
+  }
+
+  ensureTooltip();
+
+  const rangesHtml = getRanges(lab).map(range => {
     return `
       <div class="lvh-range-row">
-        <span class="lvh-range-population">${escapeHtml(r.population)}</span>
-        <span class="lvh-range-value">${escapeHtml(valueStr)}</span>
+        <span class="lvh-range-population">${escapeHtml(range.population)}</span>
+        <span class="lvh-range-value">${formatRangeValue(range)}</span>
       </div>`;
   }).join('');
 
-  const siHtml = lab.siRange
-    ? `<div class="lvh-si-row"><span class="lvh-si-label">SI:</span>${escapeHtml(lab.siRange)}</div>`
-    : '';
-
-  const notesHtml = lab.notes
-    ? `<div class="lvh-notes">${escapeHtml(lab.notes)}</div>`
-    : '';
+  const notesHtml = lab.notes ? `<div class="lvh-notes">${escapeHtml(lab.notes)}</div>` : '';
 
   tooltip.innerHTML = `
     <div class="lvh-tooltip-header">
@@ -118,32 +114,32 @@ function showTooltip(lab, anchorRect) {
     </div>
     <div class="lvh-tooltip-body">
       ${rangesHtml}
-      ${siHtml}
       ${notesHtml}
     </div>`;
 
-  // Position tooltip (flip if near viewport edge)
-  tooltip.style.opacity = '0';
   tooltip.style.display = 'block';
+  tooltip.style.opacity = '0';
 
-  const vw = window.innerWidth;
-  const vh = window.innerHeight;
-  const tw = tooltip.offsetWidth;
-  const th = tooltip.offsetHeight;
+  const viewportWidth = window.innerWidth;
+  const viewportHeight = window.innerHeight;
+  const tooltipWidth = tooltip.offsetWidth;
+  const tooltipHeight = tooltip.offsetHeight;
 
   let top = anchorRect.bottom + 8;
   let left = anchorRect.left;
 
-  // Flip above if not enough room below
-  if (top + th > vh - 8) {
-    top = anchorRect.top - th - 8;
+  if (top + tooltipHeight > viewportHeight - 8) {
+    top = anchorRect.top - tooltipHeight - 8;
   }
-  // Keep within viewport horizontally
-  if (left + tw > vw - 8) {
-    left = vw - tw - 8;
+  if (left + tooltipWidth > viewportWidth - 8) {
+    left = viewportWidth - tooltipWidth - 8;
   }
-  if (left < 8) left = 8;
-  if (top < 8) top = 8;
+  if (left < 8) {
+    left = 8;
+  }
+  if (top < 8) {
+    top = 8;
+  }
 
   tooltip.style.left = `${left}px`;
   tooltip.style.top = `${top}px`;
@@ -151,43 +147,77 @@ function showTooltip(lab, anchorRect) {
 }
 
 function hideTooltip() {
-  if (!tooltip) return;
+  if (!tooltip) {
+    return;
+  }
   tooltip.classList.remove('lvh-visible');
 }
 
-function escapeHtml(str) {
-  if (str === null || str === undefined) return '';
-  return String(str)
+function escapeHtml(value) {
+  if (value === null || value === undefined) {
+    return '';
+  }
+  return String(value)
     .replace(/&/g, '&amp;')
     .replace(/</g, '&lt;')
     .replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;');
 }
 
-// ── DOM scanning ───────────────────────────────────────────────────────────
+function formatRangeValue(range) {
+  const unit = escapeHtml(range.unit);
+  if (range.low === null || range.low === undefined) {
+    return range.high !== null && range.high !== undefined ? `&lt; ${escapeHtml(range.high)} ${unit}` : 'Negative';
+  }
+  if (range.high === null || range.high === undefined) {
+    return `&ge; ${escapeHtml(range.low)} ${unit}`;
+  }
+  return `${escapeHtml(range.low)}–${escapeHtml(range.high)} ${unit}`;
+}
+
 function scanDocument() {
-  if (!masterRegex || !highlightEnabled) return;
+  if (!masterRegex || !document.body) {
+    return;
+  }
+  detectedLabs.clear();
   scanNode(document.body);
 }
 
 function scanNode(root) {
-  if (!root) return;
-  // Walk text nodes
+  if (!root || !masterRegex) {
+    return;
+  }
+
+  if (root.nodeType === Node.TEXT_NODE) {
+    processTextNode(root);
+    return;
+  }
+
+  if (root.nodeType !== Node.ELEMENT_NODE && root.nodeType !== Node.DOCUMENT_FRAGMENT_NODE) {
+    return;
+  }
+
   const walker = document.createTreeWalker(
     root,
     NodeFilter.SHOW_TEXT,
     {
       acceptNode(node) {
         const parent = node.parentElement;
-        if (!parent) return NodeFilter.FILTER_REJECT;
-        // Skip unwanted tags
-        if (SKIP_TAGS.has(parent.tagName)) return NodeFilter.FILTER_REJECT;
-        // Skip contenteditable
-        if (parent.isContentEditable) return NodeFilter.FILTER_REJECT;
-        // Skip already-highlighted spans (prevent double-highlight)
-        if (parent.classList.contains('lvh-highlight')) return NodeFilter.FILTER_REJECT;
-        // Skip empty/whitespace-only nodes
-        if (!node.nodeValue.trim()) return NodeFilter.FILTER_REJECT;
+        if (!parent) {
+          return NodeFilter.FILTER_REJECT;
+        }
+        if (SKIP_TAGS.has(parent.tagName)) {
+          return NodeFilter.FILTER_REJECT;
+        }
+        if (parent.isContentEditable) {
+          return NodeFilter.FILTER_REJECT;
+        }
+        if (parent.closest('.lvh-highlight') || parent.closest('#lvh-tooltip')) {
+          return NodeFilter.FILTER_REJECT;
+        }
+        if (!node.nodeValue || !node.nodeValue.trim()) {
+          return NodeFilter.FILTER_REJECT;
+        }
         return NodeFilter.FILTER_ACCEPT;
       }
     }
@@ -199,17 +229,27 @@ function scanNode(root) {
     textNodes.push(node);
   }
 
-  // Process collected text nodes
   textNodes.forEach(processTextNode);
 }
 
 function processTextNode(textNode) {
   const text = textNode.nodeValue;
+  if (!text) {
+    return;
+  }
+
+  masterRegex.lastIndex = 0;
+  if (!masterRegex.test(text)) {
+    return;
+  }
+
   masterRegex.lastIndex = 0;
 
-  if (!masterRegex.test(text)) return; // Fast path: no match
+  if (!autoHighlight) {
+    trackMatches(text);
+    return;
+  }
 
-  masterRegex.lastIndex = 0;
   const fragment = document.createDocumentFragment();
   let lastIndex = 0;
   let match;
@@ -218,71 +258,90 @@ function processTextNode(textNode) {
     const matchedText = match[0];
     const start = match.index;
 
-    // Append text before match
     if (start > lastIndex) {
       fragment.appendChild(document.createTextNode(text.slice(lastIndex, start)));
     }
 
-    // Look up lab data
     const lab = aliasToLab[matchedText.toLowerCase()];
-    if (lab) {
-      detectedLabs.add(lab.id);
-
-      const span = document.createElement('span');
-      span.className = 'lvh-highlight';
-      span.textContent = matchedText;
-      span.dataset.labId = lab.id;
-      span.title = `${lab.name} — hover for reference range`;
-
-      // Tooltip events
-      span.addEventListener('mouseenter', (e) => {
-        showTooltip(lab, span.getBoundingClientRect());
-      });
-      span.addEventListener('mouseleave', hideTooltip);
-
-      fragment.appendChild(span);
-    } else {
+    if (!lab) {
       fragment.appendChild(document.createTextNode(matchedText));
+      lastIndex = start + matchedText.length;
+      continue;
     }
+
+    detectedLabs.add(lab.id);
+
+    const span = document.createElement('span');
+    span.className = 'lvh-highlight';
+    span.dataset.labId = lab.id;
+    span.textContent = matchedText;
+    span.title = showTooltips ? `${lab.name} — hover for reference range` : lab.name;
+    span.addEventListener('mouseenter', () => {
+      if (!showTooltips) {
+        return;
+      }
+      showTooltip(lab, span.getBoundingClientRect());
+    });
+    span.addEventListener('mouseleave', hideTooltip);
+    fragment.appendChild(span);
 
     lastIndex = start + matchedText.length;
   }
 
-  // Append remaining text
   if (lastIndex < text.length) {
     fragment.appendChild(document.createTextNode(text.slice(lastIndex)));
   }
 
-  // Replace original text node with fragment
   if (fragment.childNodes.length > 1 || (fragment.firstChild && fragment.firstChild.nodeType !== Node.TEXT_NODE)) {
+    if (!textNode.parentNode) return;
     textNode.parentNode.replaceChild(fragment, textNode);
   }
 }
 
-// ── MutationObserver for SPAs ──────────────────────────────────────────────
+function trackMatches(text) {
+  masterRegex.lastIndex = 0;
+  let match;
+  while ((match = masterRegex.exec(text)) !== null) {
+    const lab = aliasToLab[match[0].toLowerCase()];
+    if (lab) {
+      detectedLabs.add(lab.id);
+    }
+  }
+}
+
+function clearHighlights() {
+  document.querySelectorAll('.lvh-highlight').forEach(element => {
+    element.replaceWith(document.createTextNode(element.textContent));
+  });
+  document.body.normalize();
+  hideTooltip();
+}
+
 function startObserver() {
-  if (observer) observer.disconnect();
+  if (observer) {
+    observer.disconnect();
+  }
 
   let debounceTimer = null;
 
-  observer = new MutationObserver((mutations) => {
-    if (!highlightEnabled) return;
-
+  observer = new MutationObserver(mutations => {
     clearTimeout(debounceTimer);
     debounceTimer = setTimeout(() => {
-      if (isProcessing) return;
-      isProcessing = true;
+      if (isProcessing) {
+        return;
+      }
 
+      isProcessing = true;
       mutations.forEach(mutation => {
         mutation.addedNodes.forEach(node => {
-          if (node.nodeType === Node.ELEMENT_NODE) {
-            scanNode(node);
+          if (node === tooltip) {
+            return;
           }
+          scanNode(node);
         });
       });
-
       isProcessing = false;
-    }, 300);
+    }, 250);
   });
 
   observer.observe(document.body, {
@@ -291,34 +350,73 @@ function startObserver() {
   });
 }
 
-// ── Message handling (from popup) ─────────────────────────────────────────
+function applySettings(settings = {}) {
+  const prevHighlight = autoHighlight;
+
+  if (settings.unitSystem) {
+    unitSystem = settings.unitSystem;
+    hideTooltip();
+  }
+  if (typeof settings.showTooltips === 'boolean') {
+    showTooltips = settings.showTooltips;
+    if (!showTooltips) {
+      hideTooltip();
+    }
+  }
+  if (typeof settings.autoHighlight === 'boolean') {
+    autoHighlight = settings.autoHighlight;
+  }
+
+  if (typeof settings.autoHighlight === 'boolean' && prevHighlight !== autoHighlight) {
+    clearHighlights();
+    if (autoHighlight) {
+      scanDocument();
+    }
+  }
+}
+
+chrome.storage.onChanged.addListener((changes, areaName) => {
+  if (areaName !== 'local') {
+    return;
+  }
+
+  const next = {};
+  if ('settings.unitSystem' in changes) {
+    next.unitSystem = changes['settings.unitSystem'].newValue;
+  }
+  if ('settings.autoHighlight' in changes) {
+    next.autoHighlight = changes['settings.autoHighlight'].newValue;
+  } else if ('highlightEnabled' in changes) {
+    next.autoHighlight = changes.highlightEnabled.newValue;
+  }
+  if ('settings.showTooltips' in changes) {
+    next.showTooltips = changes['settings.showTooltips'].newValue;
+  }
+
+  if (Object.keys(next).length > 0) {
+    applySettings(next);
+  }
+});
+
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   if (message.action === 'getDetectedLabs') {
-    const labs = labData.filter(lab => detectedLabs.has(lab.id));
-    sendResponse({ labs });
+    sendResponse({ labs: labData.filter(lab => detectedLabs.has(lab.id)) });
     return true;
   }
 
   if (message.action === 'setHighlight') {
-    highlightEnabled = message.enabled;
-    if (!highlightEnabled) {
-      // Remove all highlights
-      document.querySelectorAll('.lvh-highlight').forEach(el => {
-        el.replaceWith(document.createTextNode(el.textContent));
-      });
-      if (observer) observer.disconnect();
-      hideTooltip();
-    } else {
-      // Re-scan page
-      buildRegex();
-      if (!tooltip) createTooltip();
-      scanDocument();
-      startObserver();
-    }
+    applySettings({ autoHighlight: !!message.enabled });
     sendResponse({ ok: true });
     return true;
   }
+
+  if (message.action === 'settingsChanged') {
+    applySettings(message.settings || {});
+    sendResponse({ ok: true });
+    return true;
+  }
+
+  return false;
 });
 
-// ── Start ──────────────────────────────────────────────────────────────────
 init();

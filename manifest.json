@@ -2,9 +2,14 @@
   "manifest_version": 3,
   "name": "LabValues Helper",
   "description": "Instantly see normal reference ranges for lab values (CBC, BMP, glucose, HbA1c & more) on any medical question or article page.",
-  "version": "1.0.0",
-  "permissions": ["storage", "activeTab"],
-  "host_permissions": ["<all_urls>"],
+  "version": "1.1.0",
+  "permissions": [
+    "storage",
+    "activeTab"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
   "action": {
     "default_popup": "popup/popup.html",
     "default_icon": {
@@ -18,16 +23,27 @@
   },
   "content_scripts": [
     {
-      "matches": ["<all_urls>"],
-      "js": ["content/content.js"],
-      "css": ["content/content.css"],
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "content/content.js"
+      ],
+      "css": [
+        "content/content.css"
+      ],
       "run_at": "document_idle"
     }
   ],
   "web_accessible_resources": [
     {
-      "resources": ["data/lab-values.json", "reference/reference.html"],
-      "matches": ["<all_urls>"]
+      "resources": [
+        "data/lab-values.json",
+        "reference/reference.html"
+      ],
+      "matches": [
+        "<all_urls>"
+      ]
     }
   ],
   "icons": {

@@ -8,7 +8,6 @@
 </head>
 <body>
   <div class="page-wrapper">
-    <!-- Header -->
     <header class="ref-header">
       <div class="ref-header-inner">
         <div class="ref-header-left">
@@ -31,28 +30,30 @@
       </div>
     </header>
 
-    <!-- Stats bar -->
+    <div class="unit-toggle-bar">
+      <span>Unit System:</span>
+      <label><input type="radio" name="refUnit" value="conventional" checked/> Conventional</label>
+      <label><input type="radio" name="refUnit" value="si"/> SI</label>
+    </div>
+
     <div class="stats-bar">
       <span id="stats-count">Loading…</span>
       <span class="stats-divider">|</span>
       <span class="stats-note">Values based on Harrison's Principles / First Aid USMLE</span>
     </div>
 
-    <!-- Category filter tabs -->
     <nav class="category-nav" id="category-nav">
       <button class="cat-btn active" data-cat="all">All</button>
     </nav>
 
-    <!-- Main content -->
     <main class="ref-main" id="ref-main">
       <p class="loading-state">Loading lab values…</p>
     </main>
 
-    <!-- Footer -->
     <footer class="ref-footer">
       <p>⚠️ <strong>Disclaimer:</strong> For educational purposes only. Not a substitute for clinical judgment.
          Reference ranges may vary by laboratory. Always verify with your institution's values.</p>
-      <p>LabValues Helper v1.0.0 — MIT License</p>
+      <p>LabValues Helper v1.1.0 — MIT License</p>
     </footer>
   </div>
 

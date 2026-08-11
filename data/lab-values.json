@@ -3,889 +3,2976 @@
     "id": "hemoglobin",
     "name": "Hemoglobin",
     "category": "CBC",
-    "aliases": ["Hb", "Hgb", "haemoglobin"],
-    "ranges": [
-      { "population": "Adult male", "low": 13.5, "high": 17.5, "unit": "g/dL" },
-      { "population": "Adult female", "low": 12.0, "high": 15.5, "unit": "g/dL" },
-      { "population": "Newborn", "low": 14.0, "high": 24.0, "unit": "g/dL" },
-      { "population": "Child (6–12 yr)", "low": 11.5, "high": 15.5, "unit": "g/dL" }
+    "aliases": [
+      "Hb",
+      "Hgb",
+      "haemoglobin"
     ],
-    "siRange": "135–175 g/L (M), 120–155 g/L (F)",
+    "ranges": {
+      "conventional": [
+        {
+          "population": "Adult male",
+          "low": 13.5,
+          "high": 17.5,
+          "unit": "g/dL"
+        },
+        {
+          "population": "Adult female",
+          "low": 12.0,
+          "high": 15.5,
+          "unit": "g/dL"
+        },
+        {
+          "population": "Newborn",
+          "low": 14.0,
+          "high": 24.0,
+          "unit": "g/dL"
+        },
+        {
+          "population": "Child (6–12 yr)",
+          "low": 11.5,
+          "high": 15.5,
+          "unit": "g/dL"
+        }
+      ],
+      "si": [
+        {
+          "population": "Adult male",
+          "low": 135,
+          "high": 175,
+          "unit": "g/L"
+        },
+        {
+          "population": "Adult female",
+          "low": 120,
+          "high": 155,
+          "unit": "g/L"
+        },
+        {
+          "population": "Newborn",
+          "low": 140,
+          "high": 240,
+          "unit": "g/L"
+        },
+        {
+          "population": "Child (6–12 yr)",
+          "low": 115,
+          "high": 155,
+          "unit": "g/L"
+        }
+      ]
+    },
+    "conversionFactor": 10,
+    "conversionNote": "g/dL × 10 = g/L",
     "notes": "Lower in pregnancy (~11 g/dL acceptable). Decreased in anemia, increased in polycythemia."
   },
   {
     "id": "hematocrit",
     "name": "Hematocrit",
     "category": "CBC",
-    "aliases": ["Hct", "packed cell volume", "PCV"],
-    "ranges": [
-      { "population": "Adult male", "low": 41, "high": 53, "unit": "%" },
-      { "population": "Adult female", "low": 36, "high": 46, "unit": "%" },
-      { "population": "Newborn", "low": 44, "high": 64, "unit": "%" }
+    "aliases": [
+      "Hct",
+      "packed cell volume",
+      "PCV"
     ],
-    "siRange": "0.41–0.53 (M), 0.36–0.46 (F)",
+    "ranges": {
+      "conventional": [
+        {
+          "population": "Adult male",
+          "low": 41,
+          "high": 53,
+          "unit": "%"
+        },
+        {
+          "population": "Adult female",
+          "low": 36,
+          "high": 46,
+          "unit": "%"
+        },
+        {
+          "population": "Newborn",
+          "low": 44,
+          "high": 64,
+          "unit": "%"
+        }
+      ],
+      "si": [
+        {
+          "population": "Adult male",
+          "low": 0.41,
+          "high": 0.53,
+          "unit": "L/L"
+        },
+        {
+          "population": "Adult female",
+          "low": 0.36,
+          "high": 0.46,
+          "unit": "L/L"
+        },
+        {
+          "population": "Newborn",
+          "low": 0.44,
+          "high": 0.64,
+          "unit": "L/L"
+        }
+      ]
+    },
+    "conversionFactor": 0.01,
+    "conversionNote": "% ÷ 100 = L/L",
     "notes": "Rule of three: Hct ≈ 3 × Hgb."
   },
   {
     "id": "rbc",
     "name": "Red Blood Cell Count",
     "category": "CBC",
-    "aliases": ["RBC", "erythrocytes", "red cell count", "red blood cells"],
-    "ranges": [
-      { "population": "Adult male", "low": 4.5, "high": 5.9, "unit": "×10⁶/µL" },
-      { "population": "Adult female", "low": 4.1, "high": 5.1, "unit": "×10⁶/µL" }
+    "aliases": [
+      "RBC",
+      "erythrocytes",
+      "red cell count",
+      "red blood cells"
     ],
-    "siRange": "4.5–5.9 ×10¹²/L (M), 4.1–5.1 ×10¹²/L (F)",
+    "ranges": {
+      "conventional": [
+        {
+          "population": "Adult male",
+          "low": 4.5,
+          "high": 5.9,
+          "unit": "×10⁶/µL"
+        },
+        {
+          "population": "Adult female",
+          "low": 4.1,
+          "high": 5.1,
+          "unit": "×10⁶/µL"
+        }
+      ],
+      "si": [
+        {
+          "population": "Adult male",
+          "low": 4.5,
+          "high": 5.9,
+          "unit": "×10¹²/L"
+        },
+        {
+          "population": "Adult female",
+          "low": 4.1,
+          "high": 5.1,
+          "unit": "×10¹²/L"
+        }
+      ]
+    },
+    "conversionFactor": 1,
+    "conversionNote": "×10⁶/µL and ×10¹²/L are numerically equivalent",
     "notes": "Decreased in anemia; elevated in polycythemia vera."
   },
   {
     "id": "wbc",
     "name": "White Blood Cell Count",
     "category": "CBC",
-    "aliases": ["WBC", "leukocytes", "white blood cells", "leukocyte count", "total leukocyte count", "TLC"],
-    "ranges": [
-      { "population": "Adult", "low": 4500, "high": 11000, "unit": "/µL" },
-      { "population": "Newborn", "low": 9000, "high": 30000, "unit": "/µL" }
+    "aliases": [
+      "WBC",
+      "leukocytes",
+      "white blood cells",
+      "leukocyte count",
+      "total leukocyte count",
+      "TLC"
     ],
-    "siRange": "4.5–11.0 ×10⁹/L",
+    "ranges": {
+      "conventional": [
+        {
+          "population": "Adult",
+          "low": 4500,
+          "high": 11000,
+          "unit": "/µL"
+        },
+        {
+          "population": "Newborn",
+          "low": 9000,
+          "high": 30000,
+          "unit": "/µL"
+        }
+      ],
+      "si": [
+        {
+          "population": "Adult",
+          "low": 4.5,
+          "high": 11.0,
+          "unit": "×10⁹/L"
+        },
+        {
+          "population": "Newborn",
+          "low": 9.0,
+          "high": 30.0,
+          "unit": "×10⁹/L"
+        }
+      ]
+    },
+    "conversionFactor": 0.001,
+    "conversionNote": "/µL ÷ 1000 = ×10⁹/L",
     "notes": "Leukocytosis (>11,000): infection, inflammation, leukemia. Leukopenia (<4,500): viral infection, marrow suppression."
   },
   {
     "id": "neutrophils",
     "name": "Neutrophils",
     "category": "CBC",
-    "aliases": ["PMN", "polymorphonuclear", "segs", "segmented neutrophils", "ANC", "absolute neutrophil count"],
-    "ranges": [
-      { "population": "Adult (%)", "low": 50, "high": 70, "unit": "%" },
-      { "population": "Adult (absolute)", "low": 1800, "high": 7700, "unit": "/µL" }
+    "aliases": [
+      "PMN",
+      "polymorphonuclear",
+      "segs",
+      "segmented neutrophils",
+      "ANC",
+      "absolute neutrophil count"
     ],
-    "siRange": "1.8–7.7 ×10⁹/L",
+    "ranges": {
+      "conventional": [
+        {
+          "population": "Adult (%)",
+          "low": 50,
+          "high": 70,
+          "unit": "%"
+        },
+        {
+          "population": "Adult (absolute)",
+          "low": 1800,
+          "high": 7700,
+          "unit": "/µL"
+        }
+      ],
+      "si": [
+        {
+          "population": "Adult (%)",
+          "low": 50,
+          "high": 70,
+          "unit": "%"
+        },
+        {
+          "population": "Adult (absolute)",
+          "low": 1.8,
+          "high": 7.7,
+          "unit": "×10⁹/L"
+        }
+      ]
+    },
+    "conversionFactor": null,
+    "conversionNote": "Percent ranges are unchanged; absolute counts /µL ÷ 1000 = ×10⁹/L",
     "notes": "Neutropenia: ANC <1500. Severe neutropenia: ANC <500."
   },
   {
     "id": "lymphocytes",
     "name": "Lymphocytes",
     "category": "CBC",
-    "aliases": ["lymphs", "lymphocyte count"],
-    "ranges": [
-      { "population": "Adult (%)", "low": 20, "high": 40, "unit": "%" },
-      { "population": "Adult (absolute)", "low": 1000, "high": 4800, "unit": "/µL" }
+    "aliases": [
+      "lymphs",
+      "lymphocyte count"
     ],
-    "siRange": "1.0–4.8 ×10⁹/L",
+    "ranges": {
+      "conventional": [
+        {
+          "population": "Adult (%)",
+          "low": 20,
+          "high": 40,
+          "unit": "%"
+        },
+        {
+          "population": "Adult (absolute)",
+          "low": 1000,
+          "high": 4800,
+          "unit": "/µL"
+        }
+      ],
+      "si": [
+        {
+          "population": "Adult (%)",
+          "low": 20,
+          "high": 40,
+          "unit": "%"
+        },
+        {
+          "population": "Adult (absolute)",
+          "low": 1.0,
+          "high": 4.8,
+          "unit": "×10⁹/L"
+        }
+      ]
+    },
+    "conversionFactor": null,
+    "conversionNote": "Percent ranges are unchanged; absolute counts /µL ÷ 1000 = ×10⁹/L",
     "notes": "Elevated in viral infections (EBV, CMV), lymphocytic leukemia."
   },
   {
     "id": "monocytes",
     "name": "Monocytes",
     "category": "CBC",
-    "aliases": ["monocyte count"],
-    "ranges": [
-      { "population": "Adult (%)", "low": 2, "high": 8, "unit": "%" },
-      { "population": "Adult (absolute)", "low": 200, "high": 900, "unit": "/µL" }
+    "aliases": [
+      "monocyte count"
     ],
-    "siRange": "0.2–0.9 ×10⁹/L",
+    "ranges": {
+      "conventional": [
+        {
+          "population": "Adult (%)",
+          "low": 2,
+          "high": 8,
+          "unit": "%"
+        },
+        {
+          "population": "Adult (absolute)",
+          "low": 200,
+          "high": 900,
+          "unit": "/µL"
+        }
+      ],
+      "si": [
+        {
+          "population": "Adult (%)",
+          "low": 2,
+          "high": 8,
+          "unit": "%"
+        },
+        {
+          "population": "Adult (absolute)",
+          "low": 0.2,
+          "high": 0.9,
+          "unit": "×10⁹/L"
+        }
+      ]
+    },
+    "conversionFactor": null,
+    "conversionNote": "Percent ranges are unchanged; absolute counts /µL ÷ 1000 = ×10⁹/L",
     "notes": "Elevated in TB, fungal infections, inflammatory bowel disease."
   },
   {
     "id": "eosinophils",
     "name": "Eosinophils",
     "category": "CBC",
-    "aliases": ["eos", "eosinophil count"],
-    "ranges": [
-      { "population": "Adult (%)", "low": 1, "high": 4, "unit": "%" },
-      { "population": "Adult (absolute)", "low": 100, "high": 400, "unit": "/µL" }
+    "aliases": [
+      "eos",
+      "eosinophil count"
     ],
-    "siRange": "0.1–0.4 ×10⁹/L",
+    "ranges": {
+      "conventional": [
+        {
+          "population": "Adult (%)",
+          "low": 1,
+          "high": 4,
+          "unit": "%"
+        },
+        {
+          "population": "Adult (absolute)",
+          "low": 100,
+          "high": 400,
+          "unit": "/µL"
+        }
+      ],
+      "si": [
+        {
+          "population": "Adult (%)",
+          "low": 1,
+          "high": 4,
+          "unit": "%"
+        },
+        {
+          "population": "Adult (absolute)",
+          "low": 0.1,
+          "high": 0.4,
+          "unit": "×10⁹/L"
+        }
+      ]
+    },
+    "conversionFactor": null,
+    "conversionNote": "Percent ranges are unchanged; absolute counts /µL ÷ 1000 = ×10⁹/L",
     "notes": "Eosinophilia in parasitic infections, allergies, asthma, Addison's disease."
   },
   {
     "id": "basophils",
     "name": "Basophils",
     "category": "CBC",
-    "aliases": ["baso", "basophil count"],
-    "ranges": [
-      { "population": "Adult (%)", "low": 0, "high": 1, "unit": "%" },
-      { "population": "Adult (absolute)", "low": 0, "high": 100, "unit": "/µL" }
+    "aliases": [
+      "baso",
+      "basophil count"
     ],
-    "siRange": "0–0.1 ×10⁹/L",
+    "ranges": {
+      "conventional": [
+        {
+          "population": "Adult (%)",
+          "low": 0,
+          "high": 1,
+          "unit": "%"
+        },
+        {
+          "population": "Adult (absolute)",
+          "low": 0,
+          "high": 100,
+          "unit": "/µL"
+        }
+      ],
+      "si": [
+        {
+          "population": "Adult (%)",
+          "low": 0,
+          "high": 1,
+          "unit": "%"
+        },
+        {
+          "population": "Adult (absolute)",
+          "low": 0.0,
+          "high": 0.1,
+          "unit": "×10⁹/L"
+        }
+      ]
+    },
+    "conversionFactor": null,
+    "conversionNote": "Percent ranges are unchanged; absolute counts /µL ÷ 1000 = ×10⁹/L",
     "notes": "Basophilia seen in CML, polycythemia vera, hypothyroidism."
   },
   {
     "id": "platelets",
     "name": "Platelets",
     "category": "CBC",
-    "aliases": ["PLT", "platelet count", "thrombocytes"],
-    "ranges": [
-      { "population": "Adult", "low": 150000, "high": 400000, "unit": "/µL" }
+    "aliases": [
+      "PLT",
+      "platelet count",
+      "thrombocytes"
     ],
-    "siRange": "150–400 ×10⁹/L",
+    "ranges": {
+      "conventional": [
+        {
+          "population": "Adult",
+          "low": 150000,
+          "high": 400000,
+          "unit": "/µL"
+        }
+      ],
+      "si": [
+        {
+          "population": "Adult",
+          "low": 150,
+          "high": 400,
+          "unit": "×10⁹/L"
+        }
+      ]
+    },
+    "conversionFactor": 0.001,
+    "conversionNote": "/µL ÷ 1000 = ×10⁹/L",
     "notes": "Thrombocytopenia (<150,000): ITP, TTP, HUS. Thrombocytosis (>400,000): reactive, essential thrombocythemia."
   },
   {
     "id": "mcv",
     "name": "Mean Corpuscular Volume",
     "category": "CBC",
-    "aliases": ["MCV", "mean cell volume"],
-    "ranges": [
-      { "population": "Adult", "low": 80, "high": 100, "unit": "fL" }
+    "aliases": [
+      "MCV",
+      "mean cell volume"
     ],
-    "siRange": "80–100 fL",
+    "ranges": {
+      "conventional": [
+        {
+          "population": "Adult",
+          "low": 80,
+          "high": 100,
+          "unit": "fL"
+        }
+      ],
+      "si": [
+        {
+          "population": "Adult",
+          "low": 80,
+          "high": 100,
+          "unit": "fL"
+        }
+      ]
+    },
+    "conversionFactor": 1,
+    "conversionNote": "Same numeric values in both systems (fL)",
     "notes": "Microcytic (<80): iron deficiency, thalassemia. Macrocytic (>100): B12/folate deficiency, liver disease."
   },
   {
     "id": "mch",
     "name": "Mean Corpuscular Hemoglobin",
     "category": "CBC",
-    "aliases": ["MCH"],
-    "ranges": [
-      { "population": "Adult", "low": 27, "high": 33, "unit": "pg" }
+    "aliases": [
+      "MCH"
     ],
-    "siRange": "27–33 pg",
+    "ranges": {
+      "conventional": [
+        {
+          "population": "Adult",
+          "low": 27,
+          "high": 33,
+          "unit": "pg"
+        }
+      ],
+      "si": [
+        {
+          "population": "Adult",
+          "low": 27,
+          "high": 33,
+          "unit": "pg"
+        }
+      ]
+    },
+    "conversionFactor": 1,
+    "conversionNote": "Same numeric values in both systems (pg)",
     "notes": "Parallel to MCV: low in microcytic, high in macrocytic anemia."
   },
   {
     "id": "mchc",
     "name": "Mean Corpuscular Hemoglobin Concentration",
     "category": "CBC",
-    "aliases": ["MCHC"],
-    "ranges": [
-      { "population": "Adult", "low": 32, "high": 36, "unit": "g/dL" }
+    "aliases": [
+      "MCHC"
     ],
-    "siRange": "320–360 g/L",
+    "ranges": {
+      "conventional": [
+        {
+          "population": "Adult",
+          "low": 32,
+          "high": 36,
+          "unit": "g/dL"
+        }
+      ],
+      "si": [
+        {
+          "population": "Adult",
+          "low": 320,
+          "high": 360,
+          "unit": "g/L"
+        }
+      ]
+    },
+    "conversionFactor": 10,
+    "conversionNote": "g/dL × 10 = g/L",
     "notes": "Elevated in hereditary spherocytosis. Decreased in iron deficiency, thalassemia."
   },
   {
     "id": "rdw",
     "name": "Red Cell Distribution Width",
     "category": "CBC",
-    "aliases": ["RDW"],
-    "ranges": [
-      { "population": "Adult", "low": 11.5, "high": 14.5, "unit": "%" }
+    "aliases": [
+      "RDW"
     ],
-    "siRange": "11.5–14.5%",
+    "ranges": {
+      "conventional": [
+        {
+          "population": "Adult",
+          "low": 11.5,
+          "high": 14.5,
+          "unit": "%"
+        }
+      ],
+      "si": [
+        {
+          "population": "Adult",
+          "low": 11.5,
+          "high": 14.5,
+          "unit": "%"
+        }
+      ]
+    },
+    "conversionFactor": 1,
+    "conversionNote": "Same numeric values in both systems (%)",
     "notes": "Elevated RDW indicates anisocytosis (iron deficiency, mixed anemia). Normal RDW in thalassemia trait."
   },
   {
     "id": "sodium",
     "name": "Sodium",
     "category": "BMP/CMP",
-    "aliases": ["Na", "Na+", "serum sodium"],
-    "ranges": [
-      { "population": "Adult", "low": 136, "high": 145, "unit": "mEq/L" }
+    "aliases": [
+      "Na",
+      "Na+",
+      "serum sodium"
     ],
-    "siRange": "136–145 mmol/L",
+    "ranges": {
+      "conventional": [
+        {
+          "population": "Adult",
+          "low": 136,
+          "high": 145,
+          "unit": "mEq/L"
+        }
+      ],
+      "si": [
+        {
+          "population": "Adult",
+          "low": 136,
+          "high": 145,
+          "unit": "mmol/L"
+        }
+      ]
+    },
+    "conversionFactor": 1,
+    "conversionNote": "mEq/L and mmol/L are numerically equivalent for sodium",
     "notes": "Hyponatremia (<136): SIADH, heart failure, cirrhosis. Hypernatremia (>145): DI, dehydration."
   },
   {
     "id": "potassium",
     "name": "Potassium",
     "category": "BMP/CMP",
-    "aliases": ["K", "K+", "serum potassium"],
-    "ranges": [
-      { "population": "Adult", "low": 3.5, "high": 5.0, "unit": "mEq/L" }
+    "aliases": [
+      "K",
+      "K+",
+      "serum potassium"
     ],
-    "siRange": "3.5–5.0 mmol/L",
+    "ranges": {
+      "conventional": [
+        {
+          "population": "Adult",
+          "low": 3.5,
+          "high": 5.0,
+          "unit": "mEq/L"
+        }
+      ],
+      "si": [
+        {
+          "population": "Adult",
+          "low": 3.5,
+          "high": 5.0,
+          "unit": "mmol/L"
+        }
+      ]
+    },
+    "conversionFactor": 1,
+    "conversionNote": "mEq/L and mmol/L are numerically equivalent for potassium",
     "notes": "Hypokalemia (<3.5): vomiting, diuretics, Conn's. Hyperkalemia (>5.0): renal failure, Addison's, ACE inhibitors."
   },
   {
     "id": "chloride",
     "name": "Chloride",
     "category": "BMP/CMP",
-    "aliases": ["Cl", "Cl-", "serum chloride"],
-    "ranges": [
-      { "population": "Adult", "low": 98, "high": 107, "unit": "mEq/L" }
+    "aliases": [
+      "Cl",
+      "Cl-",
+      "serum chloride"
     ],
-    "siRange": "98–107 mmol/L",
+    "ranges": {
+      "conventional": [
+        {
+          "population": "Adult",
+          "low": 98,
+          "high": 107,
+          "unit": "mEq/L"
+        }
+      ],
+      "si": [
+        {
+          "population": "Adult",
+          "low": 98,
+          "high": 107,
+          "unit": "mmol/L"
+        }
+      ]
+    },
+    "conversionFactor": 1,
+    "conversionNote": "mEq/L and mmol/L are numerically equivalent for chloride",
     "notes": "Low in vomiting/metabolic alkalosis. High in diarrhea/metabolic acidosis."
   },
   {
     "id": "bicarbonate",
     "name": "Bicarbonate",
     "category": "BMP/CMP",
-    "aliases": ["HCO3", "HCO3-", "bicarb", "total CO2"],
-    "ranges": [
-      { "population": "Adult", "low": 22, "high": 29, "unit": "mEq/L" }
+    "aliases": [
+      "HCO3",
+      "HCO3-",
+      "bicarb",
+      "total CO2"
     ],
-    "siRange": "22–29 mmol/L",
+    "ranges": {
+      "conventional": [
+        {
+          "population": "Adult",
+          "low": 22,
+          "high": 29,
+          "unit": "mEq/L"
+        }
+      ],
+      "si": [
+        {
+          "population": "Adult",
+          "low": 22,
+          "high": 29,
+          "unit": "mmol/L"
+        }
+      ]
+    },
+    "conversionFactor": 1,
+    "conversionNote": "mEq/L and mmol/L are numerically equivalent for bicarbonate",
     "notes": "Low in metabolic acidosis. High in metabolic alkalosis."
   },
   {
     "id": "bun",
     "name": "Blood Urea Nitrogen",
     "category": "BMP/CMP",
-    "aliases": ["BUN", "urea nitrogen", "blood urea"],
-    "ranges": [
-      { "population": "Adult", "low": 7, "high": 20, "unit": "mg/dL" }
+    "aliases": [
+      "BUN",
+      "urea nitrogen",
+      "blood urea"
     ],
-    "siRange": "2.5–7.1 mmol/L",
+    "ranges": {
+      "conventional": [
+        {
+          "population": "Adult",
+          "low": 7,
+          "high": 20,
+          "unit": "mg/dL"
+        }
+      ],
+      "si": [
+        {
+          "population": "Adult",
+          "low": 2.5,
+          "high": 7.1,
+          "unit": "mmol/L"
+        }
+      ]
+    },
+    "conversionFactor": 0.357,
+    "conversionNote": "mg/dL × 0.357 = mmol/L urea",
     "notes": "BUN:Creatinine ratio >20 suggests pre-renal azotemia. Elevated in renal failure, GI bleed."
   },
   {
     "id": "creatinine",
     "name": "Creatinine",
     "category": "BMP/CMP",
-    "aliases": ["Cr", "serum creatinine", "SCr"],
-    "ranges": [
-      { "population": "Adult male", "low": 0.7, "high": 1.3, "unit": "mg/dL" },
-      { "population": "Adult female", "low": 0.6, "high": 1.1, "unit": "mg/dL" }
+    "aliases": [
+      "Cr",
+      "serum creatinine",
+      "SCr"
     ],
-    "siRange": "62–115 µmol/L (M), 53–97 µmol/L (F)",
+    "ranges": {
+      "conventional": [
+        {
+          "population": "Adult male",
+          "low": 0.7,
+          "high": 1.3,
+          "unit": "mg/dL"
+        },
+        {
+          "population": "Adult female",
+          "low": 0.6,
+          "high": 1.1,
+          "unit": "mg/dL"
+        }
+      ],
+      "si": [
+        {
+          "population": "Adult male",
+          "low": 61.9,
+          "high": 114.9,
+          "unit": "µmol/L"
+        },
+        {
+          "population": "Adult female",
+          "low": 53.0,
+          "high": 97.2,
+          "unit": "µmol/L"
+        }
+      ]
+    },
+    "conversionFactor": 88.4,
+    "conversionNote": "mg/dL × 88.4 = µmol/L",
     "notes": "Doubles for every 50% reduction in GFR. Lower in pregnancy."
   },
   {
     "id": "glucose_fasting",
     "name": "Glucose (Fasting)",
     "category": "BMP/CMP",
-    "aliases": ["fasting glucose", "fasting blood glucose", "FBG", "FPG", "fasting blood sugar", "FBS"],
-    "ranges": [
-      { "population": "Normal", "low": 70, "high": 99, "unit": "mg/dL" },
-      { "population": "Prediabetes (IFG)", "low": 100, "high": 125, "unit": "mg/dL" },
-      { "population": "Diabetes", "low": 126, "high": null, "unit": "mg/dL" }
+    "aliases": [
+      "fasting glucose",
+      "fasting blood glucose",
+      "FBG",
+      "FPG",
+      "fasting blood sugar",
+      "FBS"
     ],
-    "siRange": "3.9–5.5 mmol/L (normal); ≥7.0 mmol/L = diabetes",
+    "ranges": {
+      "conventional": [
+        {
+          "population": "Normal",
+          "low": 70,
+          "high": 99,
+          "unit": "mg/dL"
+        },
+        {
+          "population": "Prediabetes (IFG)",
+          "low": 100,
+          "high": 125,
+          "unit": "mg/dL"
+        },
+        {
+          "population": "Diabetes",
+          "low": 126,
+          "high": null,
+          "unit": "mg/dL"
+        }
+      ],
+      "si": [
+        {
+          "population": "Normal",
+          "low": 3.9,
+          "high": 5.5,
+          "unit": "mmol/L"
+        },
+        {
+          "population": "Prediabetes (IFG)",
+          "low": 5.5,
+          "high": 6.9,
+          "unit": "mmol/L"
+        },
+        {
+          "population": "Diabetes",
+          "low": 7.0,
+          "high": null,
+          "unit": "mmol/L"
+        }
+      ]
+    },
+    "conversionFactor": 0.0555,
+    "conversionNote": "mg/dL × 0.0555 = mmol/L",
     "notes": "Fasting ≥8 hours. Diabetes: confirmed on two separate occasions."
   },
   {
     "id": "glucose_random",
     "name": "Random Glucose",
     "category": "BMP/CMP",
-    "aliases": ["random blood sugar", "RBS", "random blood glucose", "blood glucose"],
-    "ranges": [
-      { "population": "Normal", "low": 70, "high": 140, "unit": "mg/dL" },
-      { "population": "Diabetes (symptomatic)", "low": 200, "high": null, "unit": "mg/dL" }
+    "aliases": [
+      "random blood sugar",
+      "RBS",
+      "random blood glucose",
+      "blood glucose"
     ],
-    "siRange": "3.9–7.8 mmol/L (normal); ≥11.1 mmol/L = diabetes",
+    "ranges": {
+      "conventional": [
+        {
+          "population": "Normal",
+          "low": 70,
+          "high": 140,
+          "unit": "mg/dL"
+        },
+        {
+          "population": "Diabetes (symptomatic)",
+          "low": 200,
+          "high": null,
+          "unit": "mg/dL"
+        }
+      ],
+      "si": [
+        {
+          "population": "Normal",
+          "low": 3.9,
+          "high": 7.8,
+          "unit": "mmol/L"
+        },
+        {
+          "population": "Diabetes (symptomatic)",
+          "low": 11.1,
+          "high": null,
+          "unit": "mmol/L"
+        }
+      ]
+    },
+    "conversionFactor": 0.0555,
+    "conversionNote": "mg/dL × 0.0555 = mmol/L",
     "notes": "Random ≥200 + symptoms = diabetes without confirmatory test needed."
   },
   {
     "id": "calcium",
     "name": "Calcium",
     "category": "BMP/CMP",
-    "aliases": ["Ca", "Ca2+", "serum calcium", "total calcium"],
-    "ranges": [
-      { "population": "Adult", "low": 8.5, "high": 10.5, "unit": "mg/dL" }
+    "aliases": [
+      "Ca",
+      "Ca2+",
+      "serum calcium",
+      "total calcium"
     ],
-    "siRange": "2.12–2.62 mmol/L",
+    "ranges": {
+      "conventional": [
+        {
+          "population": "Adult",
+          "low": 8.5,
+          "high": 10.5,
+          "unit": "mg/dL"
+        }
+      ],
+      "si": [
+        {
+          "population": "Adult",
+          "low": 2.12,
+          "high": 2.62,
+          "unit": "mmol/L"
+        }
+      ]
+    },
+    "conversionFactor": 0.25,
+    "conversionNote": "mg/dL × 0.25 = mmol/L",
     "notes": "Correct for albumin: add 0.8 mg/dL for each 1 g/dL albumin below 4. Ionized Ca: 4.5–5.6 mg/dL (1.12–1.40 mmol/L)."
   },
   {
     "id": "magnesium",
     "name": "Magnesium",
     "category": "BMP/CMP",
-    "aliases": ["Mg", "Mg2+", "serum magnesium"],
-    "ranges": [
-      { "population": "Adult", "low": 1.5, "high": 2.5, "unit": "mEq/L" }
+    "aliases": [
+      "Mg",
+      "Mg2+",
+      "serum magnesium"
     ],
-    "siRange": "0.75–1.25 mmol/L",
+    "ranges": {
+      "conventional": [
+        {
+          "population": "Adult",
+          "low": 1.5,
+          "high": 2.5,
+          "unit": "mEq/L"
+        }
+      ],
+      "si": [
+        {
+          "population": "Adult",
+          "low": 0.75,
+          "high": 1.25,
+          "unit": "mmol/L"
+        }
+      ]
+    },
+    "conversionFactor": 0.5,
+    "conversionNote": "mEq/L ÷ 2 = mmol/L for Mg²⁺",
     "notes": "Hypomagnesemia causes refractory hypokalemia and hypocalcemia. Used in eclampsia."
   },
   {
     "id": "phosphate",
     "name": "Phosphate",
     "category": "BMP/CMP",
-    "aliases": ["phosphorus", "PO4", "inorganic phosphorus", "serum phosphate"],
-    "ranges": [
-      { "population": "Adult", "low": 2.5, "high": 4.5, "unit": "mg/dL" }
+    "aliases": [
+      "phosphorus",
+      "PO4",
+      "inorganic phosphorus",
+      "serum phosphate"
     ],
-    "siRange": "0.81–1.45 mmol/L",
+    "ranges": {
+      "conventional": [
+        {
+          "population": "Adult",
+          "low": 2.5,
+          "high": 4.5,
+          "unit": "mg/dL"
+        }
+      ],
+      "si": [
+        {
+          "population": "Adult",
+          "low": 0.81,
+          "high": 1.45,
+          "unit": "mmol/L"
+        }
+      ]
+    },
+    "conversionFactor": 0.3229,
+    "conversionNote": "mg/dL × 0.3229 = mmol/L",
     "notes": "Hyperphosphatemia in renal failure. Hypophosphatemia in rickets, hyperparathyroidism, refeeding syndrome."
   },
   {
     "id": "total_protein",
     "name": "Total Protein",
     "category": "BMP/CMP",
-    "aliases": ["serum total protein", "TP"],
-    "ranges": [
-      { "population": "Adult", "low": 6.0, "high": 8.3, "unit": "g/dL" }
+    "aliases": [
+      "serum total protein",
+      "TP"
     ],
-    "siRange": "60–83 g/L",
+    "ranges": {
+      "conventional": [
+        {
+          "population": "Adult",
+          "low": 6.0,
+          "high": 8.3,
+          "unit": "g/dL"
+        }
+      ],
+      "si": [
+        {
+          "population": "Adult",
+          "low": 60,
+          "high": 83,
+          "unit": "g/L"
+        }
+      ]
+    },
+    "conversionFactor": 10,
+    "conversionNote": "g/dL × 10 = g/L",
     "notes": "Decreased in malnutrition, liver disease, nephrotic syndrome."
   },
   {
     "id": "albumin",
     "name": "Albumin",
     "category": "BMP/CMP",
-    "aliases": ["serum albumin", "Alb"],
-    "ranges": [
-      { "population": "Adult", "low": 3.5, "high": 5.0, "unit": "g/dL" }
+    "aliases": [
+      "serum albumin",
+      "Alb"
     ],
-    "siRange": "35–50 g/L",
+    "ranges": {
+      "conventional": [
+        {
+          "population": "Adult",
+          "low": 3.5,
+          "high": 5.0,
+          "unit": "g/dL"
+        }
+      ],
+      "si": [
+        {
+          "population": "Adult",
+          "low": 35,
+          "high": 50,
+          "unit": "g/L"
+        }
+      ]
+    },
+    "conversionFactor": 10,
+    "conversionNote": "g/dL × 10 = g/L",
     "notes": "Hypoalbuminemia: malnutrition, liver disease, nephrotic syndrome, inflammation."
   },
   {
     "id": "ast",
     "name": "Aspartate Aminotransferase",
     "category": "LFT",
-    "aliases": ["AST", "SGOT", "aspartate transaminase"],
-    "ranges": [
-      { "population": "Adult", "low": 10, "high": 40, "unit": "U/L" }
+    "aliases": [
+      "AST",
+      "SGOT",
+      "aspartate transaminase"
     ],
-    "siRange": "10–40 U/L",
+    "ranges": {
+      "conventional": [
+        {
+          "population": "Adult",
+          "low": 10,
+          "high": 40,
+          "unit": "U/L"
+        }
+      ],
+      "si": [
+        {
+          "population": "Adult",
+          "low": 10,
+          "high": 40,
+          "unit": "U/L"
+        }
+      ]
+    },
+    "conversionFactor": 1,
+    "conversionNote": "U/L and IU/L are used equivalently",
     "notes": "Present in liver, heart, muscle, kidney. AST:ALT >2:1 suggests alcoholic liver disease."
   },
   {
     "id": "alt",
     "name": "Alanine Aminotransferase",
     "category": "LFT",
-    "aliases": ["ALT", "SGPT", "alanine transaminase"],
-    "ranges": [
-      { "population": "Adult", "low": 7, "high": 56, "unit": "U/L" }
+    "aliases": [
+      "ALT",
+      "SGPT",
+      "alanine transaminase"
     ],
-    "siRange": "7–56 U/L",
+    "ranges": {
+      "conventional": [
+        {
+          "population": "Adult",
+          "low": 7,
+          "high": 56,
+          "unit": "U/L"
+        }
+      ],
+      "si": [
+        {
+          "population": "Adult",
+          "low": 7,
+          "high": 56,
+          "unit": "U/L"
+        }
+      ]
+    },
+    "conversionFactor": 1,
+    "conversionNote": "U/L and IU/L are used equivalently",
     "notes": "More liver-specific than AST. Elevated in NAFLD, viral hepatitis, drug-induced liver injury."
   },
   {
     "id": "alp",
     "name": "Alkaline Phosphatase",
     "category": "LFT",
-    "aliases": ["ALP", "alk phos"],
-    "ranges": [
-      { "population": "Adult", "low": 44, "high": 147, "unit": "U/L" }
+    "aliases": [
+      "ALP",
+      "alk phos"
     ],
-    "siRange": "44–147 U/L",
+    "ranges": {
+      "conventional": [
+        {
+          "population": "Adult",
+          "low": 44,
+          "high": 147,
+          "unit": "U/L"
+        }
+      ],
+      "si": [
+        {
+          "population": "Adult",
+          "low": 44,
+          "high": 147,
+          "unit": "U/L"
+        }
+      ]
+    },
+    "conversionFactor": 1,
+    "conversionNote": "U/L and IU/L are used equivalently",
     "notes": "Elevated in cholestasis, bone disease (Paget's, metastases), pregnancy."
   },
   {
     "id": "ggt",
     "name": "Gamma-Glutamyl Transferase",
     "category": "LFT",
-    "aliases": ["GGT", "gamma GT", "GGTP"],
-    "ranges": [
-      { "population": "Adult male", "low": 8, "high": 61, "unit": "U/L" },
-      { "population": "Adult female", "low": 5, "high": 36, "unit": "U/L" }
+    "aliases": [
+      "GGT",
+      "gamma GT",
+      "GGTP"
     ],
-    "siRange": "8–61 U/L (M); 5–36 U/L (F)",
+    "ranges": {
+      "conventional": [
+        {
+          "population": "Adult male",
+          "low": 8,
+          "high": 61,
+          "unit": "U/L"
+        },
+        {
+          "population": "Adult female",
+          "low": 5,
+          "high": 36,
+          "unit": "U/L"
+        }
+      ],
+      "si": [
+        {
+          "population": "Adult male",
+          "low": 8,
+          "high": 61,
+          "unit": "U/L"
+        },
+        {
+          "population": "Adult female",
+          "low": 5,
+          "high": 36,
+          "unit": "U/L"
+        }
+      ]
+    },
+    "conversionFactor": 1,
+    "conversionNote": "U/L and IU/L are used equivalently",
     "notes": "Sensitive for alcohol use and hepatobiliary disease. Not elevated in bone disease (unlike ALP)."
   },
   {
     "id": "total_bilirubin",
     "name": "Total Bilirubin",
     "category": "LFT",
-    "aliases": ["total bili", "bilirubin", "serum bilirubin"],
-    "ranges": [
-      { "population": "Adult", "low": 0.1, "high": 1.2, "unit": "mg/dL" }
+    "aliases": [
+      "total bili",
+      "bilirubin",
+      "serum bilirubin"
     ],
-    "siRange": "2–21 µmol/L",
+    "ranges": {
+      "conventional": [
+        {
+          "population": "Adult",
+          "low": 0.1,
+          "high": 1.2,
+          "unit": "mg/dL"
+        }
+      ],
+      "si": [
+        {
+          "population": "Adult",
+          "low": 1.7,
+          "high": 20.5,
+          "unit": "µmol/L"
+        }
+      ]
+    },
+    "conversionFactor": 17.1,
+    "conversionNote": "mg/dL × 17.1 = µmol/L",
     "notes": "Jaundice visible >2.5 mg/dL. Elevated in hemolysis, hepatic disease, cholestasis."
   },
   {
     "id": "direct_bilirubin",
     "name": "Direct Bilirubin",
     "category": "LFT",
-    "aliases": ["conjugated bilirubin", "direct bili"],
-    "ranges": [
-      { "population": "Adult", "low": 0.0, "high": 0.3, "unit": "mg/dL" }
+    "aliases": [
+      "conjugated bilirubin",
+      "direct bili"
     ],
-    "siRange": "0–5 µmol/L",
+    "ranges": {
+      "conventional": [
+        {
+          "population": "Adult",
+          "low": 0.0,
+          "high": 0.3,
+          "unit": "mg/dL"
+        }
+      ],
+      "si": [
+        {
+          "population": "Adult",
+          "low": 0.0,
+          "high": 5.1,
+          "unit": "µmol/L"
+        }
+      ]
+    },
+    "conversionFactor": 17.1,
+    "conversionNote": "mg/dL × 17.1 = µmol/L",
     "notes": "Elevated in obstructive jaundice, hepatocellular disease, Dubin-Johnson, Rotor syndrome."
   },
   {
     "id": "indirect_bilirubin",
     "name": "Indirect Bilirubin",
     "category": "LFT",
-    "aliases": ["unconjugated bilirubin", "indirect bili"],
-    "ranges": [
-      { "population": "Adult", "low": 0.1, "high": 0.9, "unit": "mg/dL" }
+    "aliases": [
+      "unconjugated bilirubin",
+      "indirect bili"
     ],
-    "siRange": "2–17 µmol/L",
+    "ranges": {
+      "conventional": [
+        {
+          "population": "Adult",
+          "low": 0.1,
+          "high": 0.9,
+          "unit": "mg/dL"
+        }
+      ],
+      "si": [
+        {
+          "population": "Adult",
+          "low": 1.7,
+          "high": 15.4,
+          "unit": "µmol/L"
+        }
+      ]
+    },
+    "conversionFactor": 17.1,
+    "conversionNote": "mg/dL × 17.1 = µmol/L",
     "notes": "Elevated in hemolytic anemia, Gilbert syndrome, Crigler-Najjar syndrome."
   },
   {
     "id": "total_cholesterol",
     "name": "Total Cholesterol",
     "category": "Lipid Panel",
-    "aliases": ["cholesterol", "TC", "serum cholesterol"],
-    "ranges": [
-      { "population": "Desirable", "low": null, "high": 200, "unit": "mg/dL" },
-      { "population": "Borderline high", "low": 200, "high": 239, "unit": "mg/dL" },
-      { "population": "High", "low": 240, "high": null, "unit": "mg/dL" }
+    "aliases": [
+      "cholesterol",
+      "TC",
+      "serum cholesterol"
     ],
-    "siRange": "<5.17 mmol/L desirable",
+    "ranges": {
+      "conventional": [
+        {
+          "population": "Desirable",
+          "low": null,
+          "high": 200,
+          "unit": "mg/dL"
+        },
+        {
+          "population": "Borderline high",
+          "low": 200,
+          "high": 239,
+          "unit": "mg/dL"
+        },
+        {
+          "population": "High",
+          "low": 240,
+          "high": null,
+          "unit": "mg/dL"
+        }
+      ],
+      "si": [
+        {
+          "population": "Desirable",
+          "low": null,
+          "high": 5.2,
+          "unit": "mmol/L"
+        },
+        {
+          "population": "Borderline high",
+          "low": 5.2,
+          "high": 6.2,
+          "unit": "mmol/L"
+        },
+        {
+          "population": "High",
+          "low": 6.2,
+          "high": null,
+          "unit": "mmol/L"
+        }
+      ]
+    },
+    "conversionFactor": 0.0259,
+    "conversionNote": "mg/dL × 0.0259 = mmol/L",
     "notes": "Fasting not required for total cholesterol measurement alone."
   },
   {
     "id": "ldl",
     "name": "LDL Cholesterol",
     "category": "Lipid Panel",
-    "aliases": ["LDL", "LDL-C", "low density lipoprotein", "low-density lipoprotein"],
-    "ranges": [
-      { "population": "Optimal", "low": null, "high": 100, "unit": "mg/dL" },
-      { "population": "Near optimal", "low": 100, "high": 129, "unit": "mg/dL" },
-      { "population": "Borderline high", "low": 130, "high": 159, "unit": "mg/dL" },
-      { "population": "High", "low": 160, "high": 189, "unit": "mg/dL" },
-      { "population": "Very high", "low": 190, "high": null, "unit": "mg/dL" }
+    "aliases": [
+      "LDL",
+      "LDL-C",
+      "low density lipoprotein",
+      "low-density lipoprotein"
     ],
-    "siRange": "<2.59 mmol/L optimal",
+    "ranges": {
+      "conventional": [
+        {
+          "population": "Optimal",
+          "low": null,
+          "high": 100,
+          "unit": "mg/dL"
+        },
+        {
+          "population": "Near optimal",
+          "low": 100,
+          "high": 129,
+          "unit": "mg/dL"
+        },
+        {
+          "population": "Borderline high",
+          "low": 130,
+          "high": 159,
+          "unit": "mg/dL"
+        },
+        {
+          "population": "High",
+          "low": 160,
+          "high": 189,
+          "unit": "mg/dL"
+        },
+        {
+          "population": "Very high",
+          "low": 190,
+          "high": null,
+          "unit": "mg/dL"
+        }
+      ],
+      "si": [
+        {
+          "population": "Optimal",
+          "low": null,
+          "high": 2.6,
+          "unit": "mmol/L"
+        },
+        {
+          "population": "Near optimal",
+          "low": 2.6,
+          "high": 3.3,
+          "unit": "mmol/L"
+        },
+        {
+          "population": "Borderline high",
+          "low": 3.4,
+          "high": 4.1,
+          "unit": "mmol/L"
+        },
+        {
+          "population": "High",
+          "low": 4.1,
+          "high": 4.9,
+          "unit": "mmol/L"
+        },
+        {
+          "population": "Very high",
+          "low": 4.9,
+          "high": null,
+          "unit": "mmol/L"
+        }
+      ]
+    },
+    "conversionFactor": 0.0259,
+    "conversionNote": "mg/dL × 0.0259 = mmol/L",
     "notes": "LDL <70 mg/dL for very high cardiovascular risk patients on statins."
   },
   {
     "id": "hdl",
     "name": "HDL Cholesterol",
     "category": "Lipid Panel",
-    "aliases": ["HDL", "HDL-C", "high density lipoprotein", "high-density lipoprotein"],
-    "ranges": [
-      { "population": "Low (risk factor)", "low": null, "high": 40, "unit": "mg/dL" },
-      { "population": "Normal male", "low": 40, "high": 60, "unit": "mg/dL" },
-      { "population": "Normal female", "low": 50, "high": 60, "unit": "mg/dL" },
-      { "population": "Protective (high)", "low": 60, "high": null, "unit": "mg/dL" }
+    "aliases": [
+      "HDL",
+      "HDL-C",
+      "high density lipoprotein",
+      "high-density lipoprotein"
     ],
-    "siRange": ">1.03 mmol/L (M), >1.29 mmol/L (F) desirable",
+    "ranges": {
+      "conventional": [
+        {
+          "population": "Low (risk factor)",
+          "low": null,
+          "high": 40,
+          "unit": "mg/dL"
+        },
+        {
+          "population": "Normal male",
+          "low": 40,
+          "high": 60,
+          "unit": "mg/dL"
+        },
+        {
+          "population": "Normal female",
+          "low": 50,
+          "high": 60,
+          "unit": "mg/dL"
+        },
+        {
+          "population": "Protective (high)",
+          "low": 60,
+          "high": null,
+          "unit": "mg/dL"
+        }
+      ],
+      "si": [
+        {
+          "population": "Low (risk factor)",
+          "low": null,
+          "high": 1.0,
+          "unit": "mmol/L"
+        },
+        {
+          "population": "Normal male",
+          "low": 1.0,
+          "high": 1.6,
+          "unit": "mmol/L"
+        },
+        {
+          "population": "Normal female",
+          "low": 1.3,
+          "high": 1.6,
+          "unit": "mmol/L"
+        },
+        {
+          "population": "Protective (high)",
+          "low": 1.6,
+          "high": null,
+          "unit": "mmol/L"
+        }
+      ]
+    },
+    "conversionFactor": 0.0259,
+    "conversionNote": "mg/dL × 0.0259 = mmol/L",
     "notes": "HDL >60 is a negative risk factor for CAD."
   },
   {
     "id": "triglycerides",
     "name": "Triglycerides",
     "category": "Lipid Panel",
-    "aliases": ["TG", "TGs", "TRIG", "triacylglycerols"],
-    "ranges": [
-      { "population": "Normal", "low": null, "high": 150, "unit": "mg/dL" },
-      { "population": "Borderline high", "low": 150, "high": 199, "unit": "mg/dL" },
-      { "population": "High", "low": 200, "high": 499, "unit": "mg/dL" },
-      { "population": "Very high (pancreatitis risk)", "low": 500, "high": null, "unit": "mg/dL" }
+    "aliases": [
+      "TG",
+      "TGs",
+      "TRIG",
+      "triacylglycerols"
     ],
-    "siRange": "<1.69 mmol/L normal",
+    "ranges": {
+      "conventional": [
+        {
+          "population": "Normal",
+          "low": null,
+          "high": 150,
+          "unit": "mg/dL"
+        },
+        {
+          "population": "Borderline high",
+          "low": 150,
+          "high": 199,
+          "unit": "mg/dL"
+        },
+        {
+          "population": "High",
+          "low": 200,
+          "high": 499,
+          "unit": "mg/dL"
+        },
+        {
+          "population": "Very high (pancreatitis risk)",
+          "low": 500,
+          "high": null,
+          "unit": "mg/dL"
+        }
+      ],
+      "si": [
+        {
+          "population": "Normal",
+          "low": null,
+          "high": 1.7,
+          "unit": "mmol/L"
+        },
+        {
+          "population": "Borderline high",
+          "low": 1.7,
+          "high": 2.2,
+          "unit": "mmol/L"
+        },
+        {
+          "population": "High",
+          "low": 2.3,
+          "high": 5.6,
+          "unit": "mmol/L"
+        },
+        {
+          "population": "Very high (pancreatitis risk)",
+          "low": 5.6,
+          "high": null,
+          "unit": "mmol/L"
+        }
+      ]
+    },
+    "conversionFactor": 0.0113,
+    "conversionNote": "mg/dL × 0.0113 = mmol/L",
     "notes": "Requires fasting 8–12 hours. Elevated in pancreatitis at >1000 mg/dL."
   },
   {
     "id": "tsh",
     "name": "Thyroid Stimulating Hormone",
     "category": "Thyroid",
-    "aliases": ["TSH", "thyrotropin"],
-    "ranges": [
-      { "population": "Adult", "low": 0.4, "high": 4.0, "unit": "mIU/L" }
+    "aliases": [
+      "TSH",
+      "thyrotropin"
     ],
-    "siRange": "0.4–4.0 mIU/L",
+    "ranges": {
+      "conventional": [
+        {
+          "population": "Adult",
+          "low": 0.4,
+          "high": 4.0,
+          "unit": "mIU/L"
+        }
+      ],
+      "si": [
+        {
+          "population": "Adult",
+          "low": 0.4,
+          "high": 4.0,
+          "unit": "mIU/L"
+        }
+      ]
+    },
+    "conversionFactor": 1,
+    "conversionNote": "Same numeric values in both systems",
     "notes": "Best single test for thyroid function. Low TSH → hyperthyroidism. High TSH → hypothyroidism."
   },
   {
     "id": "free_t4",
     "name": "Free T4",
     "category": "Thyroid",
-    "aliases": ["FT4", "free thyroxine"],
-    "ranges": [
-      { "population": "Adult", "low": 0.8, "high": 1.8, "unit": "ng/dL" }
+    "aliases": [
+      "FT4",
+      "free thyroxine"
     ],
-    "siRange": "10–23 pmol/L",
+    "ranges": {
+      "conventional": [
+        {
+          "population": "Adult",
+          "low": 0.8,
+          "high": 1.8,
+          "unit": "ng/dL"
+        }
+      ],
+      "si": [
+        {
+          "population": "Adult",
+          "low": 10.3,
+          "high": 23.2,
+          "unit": "pmol/L"
+        }
+      ]
+    },
+    "conversionFactor": 12.87,
+    "conversionNote": "ng/dL × 12.87 = pmol/L",
     "notes": "Active form of thyroid hormone. Decreased in hypothyroidism, increased in hyperthyroidism."
   },
   {
     "id": "free_t3",
     "name": "Free T3",
     "category": "Thyroid",
-    "aliases": ["FT3", "free triiodothyronine"],
-    "ranges": [
-      { "population": "Adult", "low": 2.3, "high": 4.2, "unit": "pg/mL" }
+    "aliases": [
+      "FT3",
+      "free triiodothyronine"
     ],
-    "siRange": "3.5–6.5 pmol/L",
+    "ranges": {
+      "conventional": [
+        {
+          "population": "Adult",
+          "low": 2.3,
+          "high": 4.2,
+          "unit": "pg/mL"
+        }
+      ],
+      "si": [
+        {
+          "population": "Adult",
+          "low": 3.5,
+          "high": 6.5,
+          "unit": "pmol/L"
+        }
+      ]
+    },
+    "conversionFactor": 1.536,
+    "conversionNote": "pg/mL × 1.536 = pmol/L",
     "notes": "Most biologically active thyroid hormone. Useful in diagnosing T3 toxicosis."
   },
   {
     "id": "total_t4",
     "name": "Total T4",
     "category": "Thyroid",
-    "aliases": ["T4", "thyroxine", "total thyroxine"],
-    "ranges": [
-      { "population": "Adult", "low": 5.0, "high": 12.0, "unit": "µg/dL" }
+    "aliases": [
+      "T4",
+      "thyroxine",
+      "total thyroxine"
     ],
-    "siRange": "64–154 nmol/L",
+    "ranges": {
+      "conventional": [
+        {
+          "population": "Adult",
+          "low": 5.0,
+          "high": 12.0,
+          "unit": "µg/dL"
+        }
+      ],
+      "si": [
+        {
+          "population": "Adult",
+          "low": 64.3,
+          "high": 154.4,
+          "unit": "nmol/L"
+        }
+      ]
+    },
+    "conversionFactor": 12.87,
+    "conversionNote": "µg/dL × 12.87 = nmol/L",
     "notes": "Affected by protein-binding changes (TBG). Elevated in pregnancy, OCP use."
   },
   {
     "id": "total_t3",
     "name": "Total T3",
     "category": "Thyroid",
-    "aliases": ["T3", "triiodothyronine", "total triiodothyronine"],
-    "ranges": [
-      { "population": "Adult", "low": 80, "high": 200, "unit": "ng/dL" }
+    "aliases": [
+      "T3",
+      "triiodothyronine",
+      "total triiodothyronine"
     ],
-    "siRange": "1.2–3.1 nmol/L",
+    "ranges": {
+      "conventional": [
+        {
+          "population": "Adult",
+          "low": 80,
+          "high": 200,
+          "unit": "ng/dL"
+        }
+      ],
+      "si": [
+        {
+          "population": "Adult",
+          "low": 1.23,
+          "high": 3.07,
+          "unit": "nmol/L"
+        }
+      ]
+    },
+    "conversionFactor": 0.01536,
+    "conversionNote": "ng/dL × 0.01536 = nmol/L",
     "notes": "Elevated in T3 toxicosis. Low in sick euthyroid syndrome."
   },
   {
     "id": "pt",
     "name": "Prothrombin Time",
     "category": "Coagulation",
-    "aliases": ["PT", "pro time"],
-    "ranges": [
-      { "population": "Adult", "low": 11, "high": 13.5, "unit": "seconds" }
+    "aliases": [
+      "PT",
+      "pro time"
     ],
-    "siRange": "11–13.5 seconds",
+    "ranges": {
+      "conventional": [
+        {
+          "population": "Adult",
+          "low": 11,
+          "high": 13.5,
+          "unit": "seconds"
+        }
+      ],
+      "si": [
+        {
+          "population": "Adult",
+          "low": 11,
+          "high": 13.5,
+          "unit": "seconds"
+        }
+      ]
+    },
+    "conversionFactor": 1,
+    "conversionNote": "Same numeric values in both systems",
     "notes": "Tests extrinsic pathway (factors VII, X, V, II, I). Prolonged in warfarin use, liver disease."
   },
   {
     "id": "inr",
     "name": "International Normalized Ratio",
     "category": "Coagulation",
-    "aliases": ["INR"],
-    "ranges": [
-      { "population": "Normal", "low": 0.8, "high": 1.2, "unit": "" },
-      { "population": "Therapeutic (warfarin)", "low": 2.0, "high": 3.0, "unit": "" },
-      { "population": "High-risk valve", "low": 2.5, "high": 3.5, "unit": "" }
+    "aliases": [
+      "INR"
     ],
-    "siRange": "0.8–1.2 (normal)",
+    "ranges": {
+      "conventional": [
+        {
+          "population": "Normal",
+          "low": 0.8,
+          "high": 1.2,
+          "unit": ""
+        },
+        {
+          "population": "Therapeutic (warfarin)",
+          "low": 2.0,
+          "high": 3.0,
+          "unit": ""
+        },
+        {
+          "population": "High-risk valve",
+          "low": 2.5,
+          "high": 3.5,
+          "unit": ""
+        }
+      ],
+      "si": [
+        {
+          "population": "Normal",
+          "low": 0.8,
+          "high": 1.2,
+          "unit": ""
+        },
+        {
+          "population": "Therapeutic (warfarin)",
+          "low": 2.0,
+          "high": 3.0,
+          "unit": ""
+        },
+        {
+          "population": "High-risk valve",
+          "low": 2.5,
+          "high": 3.5,
+          "unit": ""
+        }
+      ]
+    },
+    "conversionFactor": 1,
+    "conversionNote": "INR is dimensionless",
     "notes": "Standardized measure of PT. INR >1.5 indicates coagulopathy. INR >5 = bleeding risk."
   },
   {
     "id": "aptt",
     "name": "Activated Partial Thromboplastin Time",
     "category": "Coagulation",
-    "aliases": ["aPTT", "PTT", "partial thromboplastin time", "APTT"],
-    "ranges": [
-      { "population": "Adult", "low": 25, "high": 35, "unit": "seconds" }
+    "aliases": [
+      "aPTT",
+      "PTT",
+      "partial thromboplastin time",
+      "APTT"
     ],
-    "siRange": "25–35 seconds",
+    "ranges": {
+      "conventional": [
+        {
+          "population": "Adult",
+          "low": 25,
+          "high": 35,
+          "unit": "seconds"
+        }
+      ],
+      "si": [
+        {
+          "population": "Adult",
+          "low": 25,
+          "high": 35,
+          "unit": "seconds"
+        }
+      ]
+    },
+    "conversionFactor": 1,
+    "conversionNote": "Same numeric values in both systems",
     "notes": "Tests intrinsic pathway. Prolonged in heparin therapy, hemophilia A/B."
   },
   {
     "id": "bleeding_time",
     "name": "Bleeding Time",
     "category": "Coagulation",
-    "aliases": ["BT"],
-    "ranges": [
-      { "population": "Adult (Ivy method)", "low": 2, "high": 7, "unit": "minutes" }
+    "aliases": [
+      "BT"
     ],
-    "siRange": "2–7 minutes",
+    "ranges": {
+      "conventional": [
+        {
+          "population": "Adult (Ivy method)",
+          "low": 2,
+          "high": 7,
+          "unit": "minutes"
+        }
+      ],
+      "si": [
+        {
+          "population": "Adult (Ivy method)",
+          "low": 2,
+          "high": 7,
+          "unit": "minutes"
+        }
+      ]
+    },
+    "conversionFactor": 1,
+    "conversionNote": "Same numeric values in both systems",
     "notes": "Tests platelet function. Prolonged in thrombocytopenia, von Willebrand disease, aspirin use."
   },
   {
     "id": "d_dimer",
     "name": "D-dimer",
     "category": "Coagulation",
-    "aliases": ["D dimer", "fibrin degradation product", "FDP"],
-    "ranges": [
-      { "population": "Adult", "low": 0, "high": 0.5, "unit": "µg/mL FEU" }
+    "aliases": [
+      "D dimer",
+      "fibrin degradation product",
+      "FDP"
     ],
-    "siRange": "<500 ng/mL FEU",
+    "ranges": {
+      "conventional": [
+        {
+          "population": "Adult",
+          "low": 0,
+          "high": 0.5,
+          "unit": "µg/mL FEU"
+        }
+      ],
+      "si": [
+        {
+          "population": "Adult",
+          "low": 0,
+          "high": 500,
+          "unit": "ng/mL FEU"
+        }
+      ]
+    },
+    "conversionFactor": 1000,
+    "conversionNote": "µg/mL FEU × 1000 = ng/mL FEU",
     "notes": "High sensitivity, low specificity. Negative D-dimer rules out DVT/PE at low/moderate pre-test probability."
   },
   {
     "id": "fibrinogen",
     "name": "Fibrinogen",
     "category": "Coagulation",
-    "aliases": ["serum fibrinogen", "plasma fibrinogen", "factor I"],
-    "ranges": [
-      { "population": "Adult", "low": 200, "high": 400, "unit": "mg/dL" }
+    "aliases": [
+      "serum fibrinogen",
+      "plasma fibrinogen",
+      "factor I"
     ],
-    "siRange": "2.0–4.0 g/L",
+    "ranges": {
+      "conventional": [
+        {
+          "population": "Adult",
+          "low": 200,
+          "high": 400,
+          "unit": "mg/dL"
+        }
+      ],
+      "si": [
+        {
+          "population": "Adult",
+          "low": 2.0,
+          "high": 4.0,
+          "unit": "g/L"
+        }
+      ]
+    },
+    "conversionFactor": 0.01,
+    "conversionNote": "mg/dL × 0.01 = g/L",
     "notes": "Decreased in DIC, liver disease. Acute phase reactant — elevated in inflammation."
   },
   {
     "id": "ph",
     "name": "Blood pH",
     "category": "ABG",
-    "aliases": ["arterial pH", "pH"],
-    "ranges": [
-      { "population": "Arterial", "low": 7.35, "high": 7.45, "unit": "" }
+    "aliases": [
+      "arterial pH",
+      "pH"
     ],
-    "siRange": "7.35–7.45",
+    "ranges": {
+      "conventional": [
+        {
+          "population": "Arterial",
+          "low": 7.35,
+          "high": 7.45,
+          "unit": ""
+        }
+      ],
+      "si": [
+        {
+          "population": "Arterial",
+          "low": 7.35,
+          "high": 7.45,
+          "unit": ""
+        }
+      ]
+    },
+    "conversionFactor": 1,
+    "conversionNote": "pH is dimensionless",
     "notes": "Acidosis: pH <7.35. Alkalosis: pH >7.45. Critical: <7.20 or >7.60."
   },
   {
     "id": "pao2",
     "name": "Arterial Oxygen Partial Pressure",
     "category": "ABG",
-    "aliases": ["PaO2", "pO2"],
-    "ranges": [
-      { "population": "Adult (room air)", "low": 75, "high": 100, "unit": "mmHg" }
+    "aliases": [
+      "PaO2",
+      "pO2"
     ],
-    "siRange": "10–13.3 kPa",
+    "ranges": {
+      "conventional": [
+        {
+          "population": "Adult (room air)",
+          "low": 75,
+          "high": 100,
+          "unit": "mmHg"
+        }
+      ],
+      "si": [
+        {
+          "population": "Adult (room air)",
+          "low": 10.0,
+          "high": 13.3,
+          "unit": "kPa"
+        }
+      ]
+    },
+    "conversionFactor": 0.1333,
+    "conversionNote": "mmHg × 0.1333 = kPa",
     "notes": "Hypoxemia: PaO2 <80 mmHg. Normal PaO2 ≈ 100 – (age/3)."
   },
   {
     "id": "paco2",
     "name": "Arterial Carbon Dioxide Partial Pressure",
     "category": "ABG",
-    "aliases": ["PaCO2", "pCO2"],
-    "ranges": [
-      { "population": "Adult", "low": 35, "high": 45, "unit": "mmHg" }
+    "aliases": [
+      "PaCO2",
+      "pCO2"
     ],
-    "siRange": "4.7–6.0 kPa",
+    "ranges": {
+      "conventional": [
+        {
+          "population": "Adult",
+          "low": 35,
+          "high": 45,
+          "unit": "mmHg"
+        }
+      ],
+      "si": [
+        {
+          "population": "Adult",
+          "low": 4.7,
+          "high": 6.0,
+          "unit": "kPa"
+        }
+      ]
+    },
+    "conversionFactor": 0.1333,
+    "conversionNote": "mmHg × 0.1333 = kPa",
     "notes": "Hypocapnia (<35): hyperventilation. Hypercapnia (>45): hypoventilation, COPD."
   },
   {
     "id": "sao2",
     "name": "Oxygen Saturation",
     "category": "ABG",
-    "aliases": ["SaO2", "SpO2", "oxygen saturation", "O2 sat"],
-    "ranges": [
-      { "population": "Adult", "low": 95, "high": 100, "unit": "%" }
+    "aliases": [
+      "SaO2",
+      "SpO2",
+      "oxygen saturation",
+      "O2 sat"
     ],
-    "siRange": "95–100%",
+    "ranges": {
+      "conventional": [
+        {
+          "population": "Adult",
+          "low": 95,
+          "high": 100,
+          "unit": "%"
+        }
+      ],
+      "si": [
+        {
+          "population": "Adult",
+          "low": 95,
+          "high": 100,
+          "unit": "%"
+        }
+      ]
+    },
+    "conversionFactor": 1,
+    "conversionNote": "Same numeric values in both systems (%)",
     "notes": "SpO2 <90% (PaO2 <60) = clinically significant hypoxemia requiring intervention."
   },
   {
     "id": "anion_gap",
     "name": "Anion Gap",
     "category": "ABG",
-    "aliases": ["AG", "anion gap"],
-    "ranges": [
-      { "population": "Adult (Na – Cl – HCO3)", "low": 8, "high": 12, "unit": "mEq/L" }
+    "aliases": [
+      "AG",
+      "anion gap"
     ],
-    "siRange": "8–12 mEq/L",
+    "ranges": {
+      "conventional": [
+        {
+          "population": "Adult (Na – Cl – HCO3)",
+          "low": 8,
+          "high": 12,
+          "unit": "mEq/L"
+        }
+      ],
+      "si": [
+        {
+          "population": "Adult (Na – Cl – HCO3)",
+          "low": 8,
+          "high": 12,
+          "unit": "mmol/L"
+        }
+      ]
+    },
+    "conversionFactor": 1,
+    "conversionNote": "mEq/L and mmol/L are numerically equivalent for monovalent ions",
     "notes": "High AG metabolic acidosis: MUDPILES (Methanol, Uremia, DKA, Propylene glycol, INH, Lactic acidosis, Ethylene glycol, Salicylates)."
   },
   {
     "id": "hba1c",
     "name": "Glycated Hemoglobin",
     "category": "Diabetes",
-    "aliases": ["HbA1c", "A1c", "hemoglobin A1c", "glycosylated hemoglobin", "HgbA1c"],
-    "ranges": [
-      { "population": "Normal", "low": null, "high": 5.7, "unit": "%" },
-      { "population": "Prediabetes", "low": 5.7, "high": 6.4, "unit": "%" },
-      { "population": "Diabetes", "low": 6.5, "high": null, "unit": "%" },
-      { "population": "Target (diabetic patients)", "low": null, "high": 7.0, "unit": "%" }
+    "aliases": [
+      "HbA1c",
+      "A1c",
+      "hemoglobin A1c",
+      "glycosylated hemoglobin",
+      "HgbA1c"
     ],
-    "siRange": "<39 mmol/mol (normal); ≥48 mmol/mol (diabetes)",
+    "ranges": {
+      "conventional": [
+        {
+          "population": "Normal",
+          "low": null,
+          "high": 5.7,
+          "unit": "%"
+        },
+        {
+          "population": "Prediabetes",
+          "low": 5.7,
+          "high": 6.4,
+          "unit": "%"
+        },
+        {
+          "population": "Diabetes",
+          "low": 6.5,
+          "high": null,
+          "unit": "%"
+        },
+        {
+          "population": "Target (diabetic patients)",
+          "low": null,
+          "high": 7.0,
+          "unit": "%"
+        }
+      ],
+      "si": [
+        {
+          "population": "Normal",
+          "low": null,
+          "high": 39,
+          "unit": "mmol/mol"
+        },
+        {
+          "population": "Prediabetes",
+          "low": 39,
+          "high": 46,
+          "unit": "mmol/mol"
+        },
+        {
+          "population": "Diabetes",
+          "low": 48,
+          "high": null,
+          "unit": "mmol/mol"
+        },
+        {
+          "population": "Target (diabetic patients)",
+          "low": null,
+          "high": 53,
+          "unit": "mmol/mol"
+        }
+      ]
+    },
+    "conversionFactor": null,
+    "conversionNote": "SI uses IFCC reporting in mmol/mol",
     "notes": "Reflects average blood glucose over 2–3 months. Not valid in hemolytic anemia, hemoglobinopathies."
   },
   {
     "id": "ogtt",
     "name": "Oral Glucose Tolerance Test",
     "category": "Diabetes",
-    "aliases": ["OGTT", "glucose tolerance test", "GTT"],
-    "ranges": [
-      { "population": "Normal (2-hr)", "low": null, "high": 140, "unit": "mg/dL" },
-      { "population": "Prediabetes (IGT 2-hr)", "low": 140, "high": 199, "unit": "mg/dL" },
-      { "population": "Diabetes (2-hr)", "low": 200, "high": null, "unit": "mg/dL" }
+    "aliases": [
+      "OGTT",
+      "glucose tolerance test",
+      "GTT"
     ],
-    "siRange": "<7.8 mmol/L (normal); ≥11.1 mmol/L (diabetes)",
+    "ranges": {
+      "conventional": [
+        {
+          "population": "Normal (2-hr)",
+          "low": null,
+          "high": 140,
+          "unit": "mg/dL"
+        },
+        {
+          "population": "Prediabetes (IGT 2-hr)",
+          "low": 140,
+          "high": 199,
+          "unit": "mg/dL"
+        },
+        {
+          "population": "Diabetes (2-hr)",
+          "low": 200,
+          "high": null,
+          "unit": "mg/dL"
+        }
+      ],
+      "si": [
+        {
+          "population": "Normal (2-hr)",
+          "low": null,
+          "high": 7.8,
+          "unit": "mmol/L"
+        },
+        {
+          "population": "Prediabetes (IGT 2-hr)",
+          "low": 7.8,
+          "high": 11.0,
+          "unit": "mmol/L"
+        },
+        {
+          "population": "Diabetes (2-hr)",
+          "low": 11.1,
+          "high": null,
+          "unit": "mmol/L"
+        }
+      ]
+    },
+    "conversionFactor": 0.0555,
+    "conversionNote": "mg/dL × 0.0555 = mmol/L",
     "notes": "Standard dose: 75 g glucose. Gold standard for diagnosing GDM."
   },
   {
     "id": "serum_iron",
     "name": "Serum Iron",
     "category": "Iron Studies",
-    "aliases": ["iron", "Fe", "serum Fe", "iron level"],
-    "ranges": [
-      { "population": "Adult male", "low": 65, "high": 175, "unit": "µg/dL" },
-      { "population": "Adult female", "low": 50, "high": 170, "unit": "µg/dL" }
+    "aliases": [
+      "iron",
+      "Fe",
+      "serum Fe",
+      "iron level"
     ],
-    "siRange": "11.6–31.3 µmol/L (M); 9.0–30.4 µmol/L (F)",
+    "ranges": {
+      "conventional": [
+        {
+          "population": "Adult male",
+          "low": 65,
+          "high": 175,
+          "unit": "µg/dL"
+        },
+        {
+          "population": "Adult female",
+          "low": 50,
+          "high": 170,
+          "unit": "µg/dL"
+        }
+      ],
+      "si": [
+        {
+          "population": "Adult male",
+          "low": 11.6,
+          "high": 31.3,
+          "unit": "µmol/L"
+        },
+        {
+          "population": "Adult female",
+          "low": 9.0,
+          "high": 30.4,
+          "unit": "µmol/L"
+        }
+      ]
+    },
+    "conversionFactor": 0.1791,
+    "conversionNote": "µg/dL × 0.1791 = µmol/L",
     "notes": "Low in iron deficiency anemia, ACD. High in hemochromatosis."
   },
   {
     "id": "ferritin",
     "name": "Ferritin",
     "category": "Iron Studies",
-    "aliases": ["serum ferritin"],
-    "ranges": [
-      { "population": "Adult male", "low": 24, "high": 336, "unit": "ng/mL" },
-      { "population": "Adult female", "low": 11, "high": 307, "unit": "ng/mL" }
+    "aliases": [
+      "serum ferritin"
     ],
-    "siRange": "24–336 µg/L (M); 11–307 µg/L (F)",
+    "ranges": {
+      "conventional": [
+        {
+          "population": "Adult male",
+          "low": 24,
+          "high": 336,
+          "unit": "ng/mL"
+        },
+        {
+          "population": "Adult female",
+          "low": 11,
+          "high": 307,
+          "unit": "ng/mL"
+        }
+      ],
+      "si": [
+        {
+          "population": "Adult male",
+          "low": 24,
+          "high": 336,
+          "unit": "µg/L"
+        },
+        {
+          "population": "Adult female",
+          "low": 11,
+          "high": 307,
+          "unit": "µg/L"
+        }
+      ]
+    },
+    "conversionFactor": 1,
+    "conversionNote": "ng/mL and µg/L are numerically equivalent",
     "notes": "Best indicator of iron stores. Low (<12) = iron deficiency. High in hemochromatosis, inflammation."
   },
   {
     "id": "tibc",
     "name": "Total Iron Binding Capacity",
     "category": "Iron Studies",
-    "aliases": ["TIBC"],
-    "ranges": [
-      { "population": "Adult", "low": 250, "high": 370, "unit": "µg/dL" }
+    "aliases": [
+      "TIBC"
     ],
-    "siRange": "44.8–66.2 µmol/L",
+    "ranges": {
+      "conventional": [
+        {
+          "population": "Adult",
+          "low": 250,
+          "high": 370,
+          "unit": "µg/dL"
+        }
+      ],
+      "si": [
+        {
+          "population": "Adult",
+          "low": 44.8,
+          "high": 66.3,
+          "unit": "µmol/L"
+        }
+      ]
+    },
+    "conversionFactor": 0.1791,
+    "conversionNote": "µg/dL × 0.1791 = µmol/L",
     "notes": "Elevated in iron deficiency. Decreased in ACD, hemochromatosis, liver disease."
   },
   {
     "id": "transferrin_saturation",
     "name": "Transferrin Saturation",
     "category": "Iron Studies",
-    "aliases": ["TSAT", "transferrin saturation"],
-    "ranges": [
-      { "population": "Adult", "low": 20, "high": 50, "unit": "%" }
+    "aliases": [
+      "TSAT",
+      "transferrin saturation"
     ],
-    "siRange": "20–50%",
+    "ranges": {
+      "conventional": [
+        {
+          "population": "Adult",
+          "low": 20,
+          "high": 50,
+          "unit": "%"
+        }
+      ],
+      "si": [
+        {
+          "population": "Adult",
+          "low": 20,
+          "high": 50,
+          "unit": "%"
+        }
+      ]
+    },
+    "conversionFactor": 1,
+    "conversionNote": "Same numeric values in both systems (%)",
     "notes": "Low (<20%) in iron deficiency. High (>50%) in hemochromatosis."
   },
   {
     "id": "troponin_i",
     "name": "Troponin I",
     "category": "Cardiac Markers",
-    "aliases": ["cTnI", "cardiac troponin I", "hs-TnI", "high-sensitivity troponin"],
-    "ranges": [
-      { "population": "Adult (conventional)", "low": 0, "high": 0.04, "unit": "ng/mL" }
+    "aliases": [
+      "cTnI",
+      "cardiac troponin I",
+      "hs-TnI",
+      "high-sensitivity troponin"
     ],
-    "siRange": "<0.04 µg/L (conventional)",
+    "ranges": {
+      "conventional": [
+        {
+          "population": "Adult (conventional)",
+          "low": 0,
+          "high": 0.04,
+          "unit": "ng/mL"
+        }
+      ],
+      "si": [
+        {
+          "population": "Adult (conventional)",
+          "low": 0.0,
+          "high": 0.04,
+          "unit": "µg/L"
+        }
+      ]
+    },
+    "conversionFactor": 1,
+    "conversionNote": "ng/mL and µg/L are numerically equivalent",
     "notes": "Rises 3–6 hrs after MI, peaks 12–24 hrs, remains elevated 7–10 days."
   },
   {
     "id": "troponin_t",
     "name": "Troponin T",
     "category": "Cardiac Markers",
-    "aliases": ["cTnT", "cardiac troponin T", "hs-TnT"],
-    "ranges": [
-      { "population": "Adult", "low": 0, "high": 0.01, "unit": "ng/mL" }
+    "aliases": [
+      "cTnT",
+      "cardiac troponin T",
+      "hs-TnT"
     ],
-    "siRange": "<0.01 µg/L",
+    "ranges": {
+      "conventional": [
+        {
+          "population": "Adult",
+          "low": 0,
+          "high": 0.01,
+          "unit": "ng/mL"
+        }
+      ],
+      "si": [
+        {
+          "population": "Adult",
+          "low": 0.0,
+          "high": 0.01,
+          "unit": "µg/L"
+        }
+      ]
+    },
+    "conversionFactor": 1,
+    "conversionNote": "ng/mL and µg/L are numerically equivalent",
     "notes": "Similar kinetics to Troponin I. hs-TnT: <14 ng/L (99th percentile)."
   },
   {
     "id": "ck_mb",
     "name": "CK-MB",
     "category": "Cardiac Markers",
-    "aliases": ["CKMB", "creatine kinase MB", "creatine kinase-MB"],
-    "ranges": [
-      { "population": "Adult", "low": 0, "high": 5, "unit": "ng/mL" }
+    "aliases": [
+      "CKMB",
+      "creatine kinase MB",
+      "creatine kinase-MB"
     ],
-    "siRange": "<5 µg/L",
+    "ranges": {
+      "conventional": [
+        {
+          "population": "Adult",
+          "low": 0,
+          "high": 5,
+          "unit": "ng/mL"
+        }
+      ],
+      "si": [
+        {
+          "population": "Adult",
+          "low": 0.0,
+          "high": 5.0,
+          "unit": "µg/L"
+        }
+      ]
+    },
+    "conversionFactor": 1,
+    "conversionNote": "ng/mL and µg/L are numerically equivalent",
     "notes": "Rises 4–8 hrs, peaks 12–24 hrs, returns to normal in 48–72 hrs."
   },
   {
     "id": "bnp",
     "name": "B-type Natriuretic Peptide",
     "category": "Cardiac Markers",
-    "aliases": ["BNP", "brain natriuretic peptide"],
-    "ranges": [
-      { "population": "Adult (<75 yr)", "low": 0, "high": 100, "unit": "pg/mL" }
+    "aliases": [
+      "BNP",
+      "brain natriuretic peptide"
     ],
-    "siRange": "<100 ng/L",
+    "ranges": {
+      "conventional": [
+        {
+          "population": "Adult (<75 yr)",
+          "low": 0,
+          "high": 100,
+          "unit": "pg/mL"
+        }
+      ],
+      "si": [
+        {
+          "population": "Adult (<75 yr)",
+          "low": 0,
+          "high": 100,
+          "unit": "ng/L"
+        }
+      ]
+    },
+    "conversionFactor": 1,
+    "conversionNote": "pg/mL and ng/L are numerically equivalent",
     "notes": "BNP <100 makes heart failure unlikely. BNP >400 strongly suggests HF."
   },
   {
     "id": "nt_probnp",
     "name": "NT-proBNP",
     "category": "Cardiac Markers",
-    "aliases": ["NT-proBNP", "N-terminal pro-BNP", "proBNP"],
-    "ranges": [
-      { "population": "Adult <50 yr", "low": 0, "high": 450, "unit": "pg/mL" },
-      { "population": "Adult 50–75 yr", "low": 0, "high": 900, "unit": "pg/mL" },
-      { "population": "Adult >75 yr", "low": 0, "high": 1800, "unit": "pg/mL" }
+    "aliases": [
+      "NT-proBNP",
+      "N-terminal pro-BNP",
+      "proBNP"
     ],
-    "siRange": "Age-dependent",
+    "ranges": {
+      "conventional": [
+        {
+          "population": "Adult <50 yr",
+          "low": 0,
+          "high": 450,
+          "unit": "pg/mL"
+        },
+        {
+          "population": "Adult 50–75 yr",
+          "low": 0,
+          "high": 900,
+          "unit": "pg/mL"
+        },
+        {
+          "population": "Adult >75 yr",
+          "low": 0,
+          "high": 1800,
+          "unit": "pg/mL"
+        }
+      ],
+      "si": [
+        {
+          "population": "Adult <50 yr",
+          "low": 0,
+          "high": 450,
+          "unit": "ng/L"
+        },
+        {
+          "population": "Adult 50–75 yr",
+          "low": 0,
+          "high": 900,
+          "unit": "ng/L"
+        },
+        {
+          "population": "Adult >75 yr",
+          "low": 0,
+          "high": 1800,
+          "unit": "ng/L"
+        }
+      ]
+    },
+    "conversionFactor": 1,
+    "conversionNote": "pg/mL and ng/L are numerically equivalent",
     "notes": "Longer half-life than BNP. Cut-off: <125 pg/mL rules out HF."
   },
   {
     "id": "crp",
     "name": "C-Reactive Protein",
     "category": "Inflammatory Markers",
-    "aliases": ["CRP", "C reactive protein", "hsCRP", "high-sensitivity CRP"],
-    "ranges": [
-      { "population": "Normal", "low": 0, "high": 1.0, "unit": "mg/dL" },
-      { "population": "Low CV risk (hs-CRP)", "low": null, "high": 1.0, "unit": "mg/L" },
-      { "population": "Average CV risk (hs-CRP)", "low": 1.0, "high": 3.0, "unit": "mg/L" },
-      { "population": "High CV risk (hs-CRP)", "low": 3.0, "high": null, "unit": "mg/L" }
+    "aliases": [
+      "CRP",
+      "C reactive protein",
+      "hsCRP",
+      "high-sensitivity CRP"
     ],
-    "siRange": "<10 mg/L",
+    "ranges": {
+      "conventional": [
+        {
+          "population": "Normal",
+          "low": 0,
+          "high": 1.0,
+          "unit": "mg/dL"
+        },
+        {
+          "population": "Low CV risk (hs-CRP)",
+          "low": null,
+          "high": 1.0,
+          "unit": "mg/L"
+        },
+        {
+          "population": "Average CV risk (hs-CRP)",
+          "low": 1.0,
+          "high": 3.0,
+          "unit": "mg/L"
+        },
+        {
+          "population": "High CV risk (hs-CRP)",
+          "low": 3.0,
+          "high": null,
+          "unit": "mg/L"
+        }
+      ],
+      "si": [
+        {
+          "population": "Normal",
+          "low": 0.0,
+          "high": 10.0,
+          "unit": "mg/L"
+        },
+        {
+          "population": "Low CV risk (hs-CRP)",
+          "low": null,
+          "high": 1.0,
+          "unit": "mg/L"
+        },
+        {
+          "population": "Average CV risk (hs-CRP)",
+          "low": 1.0,
+          "high": 3.0,
+          "unit": "mg/L"
+        },
+        {
+          "population": "High CV risk (hs-CRP)",
+          "low": 3.0,
+          "high": null,
+          "unit": "mg/L"
+        }
+      ]
+    },
+    "conversionFactor": null,
+    "conversionNote": "Conventional CRP may be reported in mg/dL; hs-CRP ranges are already in mg/L",
     "notes": "Acute phase reactant. Used in sepsis evaluation and cardiovascular risk stratification."
   },
   {
     "id": "esr",
     "name": "Erythrocyte Sedimentation Rate",
     "category": "Inflammatory Markers",
-    "aliases": ["ESR", "sed rate", "sedimentation rate"],
-    "ranges": [
-      { "population": "Male <50 yr", "low": 0, "high": 15, "unit": "mm/hr" },
-      { "population": "Male ≥50 yr", "low": 0, "high": 20, "unit": "mm/hr" },
-      { "population": "Female <50 yr", "low": 0, "high": 20, "unit": "mm/hr" },
-      { "population": "Female ≥50 yr", "low": 0, "high": 30, "unit": "mm/hr" }
+    "aliases": [
+      "ESR",
+      "sed rate",
+      "sedimentation rate"
     ],
-    "siRange": "See ranges",
+    "ranges": {
+      "conventional": [
+        {
+          "population": "Male <50 yr",
+          "low": 0,
+          "high": 15,
+          "unit": "mm/hr"
+        },
+        {
+          "population": "Male ≥50 yr",
+          "low": 0,
+          "high": 20,
+          "unit": "mm/hr"
+        },
+        {
+          "population": "Female <50 yr",
+          "low": 0,
+          "high": 20,
+          "unit": "mm/hr"
+        },
+        {
+          "population": "Female ≥50 yr",
+          "low": 0,
+          "high": 30,
+          "unit": "mm/hr"
+        }
+      ],
+      "si": [
+        {
+          "population": "Male <50 yr",
+          "low": 0,
+          "high": 15,
+          "unit": "mm/hr"
+        },
+        {
+          "population": "Male ≥50 yr",
+          "low": 0,
+          "high": 20,
+          "unit": "mm/hr"
+        },
+        {
+          "population": "Female <50 yr",
+          "low": 0,
+          "high": 20,
+          "unit": "mm/hr"
+        },
+        {
+          "population": "Female ≥50 yr",
+          "low": 0,
+          "high": 30,
+          "unit": "mm/hr"
+        }
+      ]
+    },
+    "conversionFactor": 1,
+    "conversionNote": "Same numeric values in both systems",
     "notes": "Nonspecific. Very high (>100) in giant cell arteritis, multiple myeloma, metastatic cancer."
   },
   {
     "id": "uric_acid",
     "name": "Uric Acid",
     "category": "Others",
-    "aliases": ["urate", "serum uric acid"],
-    "ranges": [
-      { "population": "Adult male", "low": 3.5, "high": 7.2, "unit": "mg/dL" },
-      { "population": "Adult female", "low": 2.6, "high": 6.0, "unit": "mg/dL" }
+    "aliases": [
+      "urate",
+      "serum uric acid"
     ],
-    "siRange": "208–428 µmol/L (M); 155–357 µmol/L (F)",
+    "ranges": {
+      "conventional": [
+        {
+          "population": "Adult male",
+          "low": 3.5,
+          "high": 7.2,
+          "unit": "mg/dL"
+        },
+        {
+          "population": "Adult female",
+          "low": 2.6,
+          "high": 6.0,
+          "unit": "mg/dL"
+        }
+      ],
+      "si": [
+        {
+          "population": "Adult male",
+          "low": 208,
+          "high": 428,
+          "unit": "µmol/L"
+        },
+        {
+          "population": "Adult female",
+          "low": 155,
+          "high": 357,
+          "unit": "µmol/L"
+        }
+      ]
+    },
+    "conversionFactor": 59.48,
+    "conversionNote": "mg/dL × 59.48 = µmol/L",
     "notes": "Hyperuricemia → gout, kidney stones. Hypouricemia in Fanconi syndrome."
   },
   {
     "id": "ldh",
     "name": "Lactate Dehydrogenase",
     "category": "Others",
-    "aliases": ["LDH", "lactic dehydrogenase"],
-    "ranges": [
-      { "population": "Adult", "low": 122, "high": 222, "unit": "U/L" }
+    "aliases": [
+      "LDH",
+      "lactic dehydrogenase"
     ],
-    "siRange": "2.0–3.8 µkat/L",
+    "ranges": {
+      "conventional": [
+        {
+          "population": "Adult",
+          "low": 122,
+          "high": 222,
+          "unit": "U/L"
+        }
+      ],
+      "si": [
+        {
+          "population": "Adult",
+          "low": 122,
+          "high": 222,
+          "unit": "U/L"
+        }
+      ]
+    },
+    "conversionFactor": 1,
+    "conversionNote": "U/L and IU/L are used equivalently",
     "notes": "Elevated in hemolysis, MI, PE, liver disease, lymphoma, megaloblastic anemia."
   },
   {
     "id": "amylase",
     "name": "Amylase",
     "category": "Pancreatic",
-    "aliases": ["serum amylase"],
-    "ranges": [
-      { "population": "Adult", "low": 25, "high": 125, "unit": "U/L" }
+    "aliases": [
+      "serum amylase"
     ],
-    "siRange": "0.42–2.08 µkat/L",
+    "ranges": {
+      "conventional": [
+        {
+          "population": "Adult",
+          "low": 25,
+          "high": 125,
+          "unit": "U/L"
+        }
+      ],
+      "si": [
+        {
+          "population": "Adult",
+          "low": 25,
+          "high": 125,
+          "unit": "U/L"
+        }
+      ]
+    },
+    "conversionFactor": 1,
+    "conversionNote": "U/L and IU/L are used equivalently",
     "notes": "Elevated >3× ULN in acute pancreatitis. Normalizes faster than lipase."
   },
   {
     "id": "lipase",
     "name": "Lipase",
     "category": "Pancreatic",
-    "aliases": ["serum lipase", "pancreatic lipase"],
-    "ranges": [
-      { "population": "Adult", "low": 10, "high": 140, "unit": "U/L" }
+    "aliases": [
+      "serum lipase",
+      "pancreatic lipase"
     ],
-    "siRange": "0.17–2.33 µkat/L",
+    "ranges": {
+      "conventional": [
+        {
+          "population": "Adult",
+          "low": 10,
+          "high": 140,
+          "unit": "U/L"
+        }
+      ],
+      "si": [
+        {
+          "population": "Adult",
+          "low": 10,
+          "high": 140,
+          "unit": "U/L"
+        }
+      ]
+    },
+    "conversionFactor": 1,
+    "conversionNote": "U/L and IU/L are used equivalently",
     "notes": "More specific for pancreatitis than amylase. Remains elevated longer."
   },
   {
     "id": "vitamin_b12",
     "name": "Vitamin B12",
     "category": "Vitamins",
-    "aliases": ["B12", "cobalamin", "cyanocobalamin", "vitamin B-12"],
-    "ranges": [
-      { "population": "Adult", "low": 200, "high": 900, "unit": "pg/mL" }
+    "aliases": [
+      "B12",
+      "cobalamin",
+      "cyanocobalamin",
+      "vitamin B-12"
     ],
-    "siRange": "148–664 pmol/L",
+    "ranges": {
+      "conventional": [
+        {
+          "population": "Adult",
+          "low": 200,
+          "high": 900,
+          "unit": "pg/mL"
+        }
+      ],
+      "si": [
+        {
+          "population": "Adult",
+          "low": 148,
+          "high": 664,
+          "unit": "pmol/L"
+        }
+      ]
+    },
+    "conversionFactor": 0.738,
+    "conversionNote": "pg/mL × 0.738 = pmol/L",
     "notes": "Deficiency (<200): megaloblastic anemia, subacute combined degeneration of spinal cord."
   },
   {
     "id": "folate",
     "name": "Folate",
     "category": "Vitamins",
-    "aliases": ["folic acid", "serum folate", "vitamin B9"],
-    "ranges": [
-      { "population": "Serum (adult)", "low": 2.7, "high": 17.0, "unit": "ng/mL" },
-      { "population": "RBC folate", "low": 140, "high": 628, "unit": "ng/mL" }
+    "aliases": [
+      "folic acid",
+      "serum folate",
+      "vitamin B9"
     ],
-    "siRange": "6.1–38.5 nmol/L (serum)",
+    "ranges": {
+      "conventional": [
+        {
+          "population": "Serum (adult)",
+          "low": 2.7,
+          "high": 17.0,
+          "unit": "ng/mL"
+        },
+        {
+          "population": "RBC folate",
+          "low": 140,
+          "high": 628,
+          "unit": "ng/mL"
+        }
+      ],
+      "si": [
+        {
+          "population": "Serum (adult)",
+          "low": 6.1,
+          "high": 38.5,
+          "unit": "nmol/L"
+        },
+        {
+          "population": "RBC folate",
+          "low": 317.2,
+          "high": 1423.0,
+          "unit": "nmol/L"
+        }
+      ]
+    },
+    "conversionFactor": 2.266,
+    "conversionNote": "ng/mL × 2.266 = nmol/L",
     "notes": "Deficiency causes megaloblastic anemia. Crucial in periconception period to prevent neural tube defects."
   },
   {
     "id": "vitamin_d",
     "name": "Vitamin D",
     "category": "Vitamins",
-    "aliases": ["25-OH vitamin D", "25-hydroxyvitamin D", "calcidiol", "25-OH-D"],
-    "ranges": [
-      { "population": "Deficient", "low": null, "high": 20, "unit": "ng/mL" },
-      { "population": "Insufficient", "low": 21, "high": 29, "unit": "ng/mL" },
-      { "population": "Sufficient", "low": 30, "high": 100, "unit": "ng/mL" },
-      { "population": "Toxic", "low": 150, "high": null, "unit": "ng/mL" }
+    "aliases": [
+      "25-OH vitamin D",
+      "25-hydroxyvitamin D",
+      "calcidiol",
+      "25-OH-D"
     ],
-    "siRange": "<50 nmol/L deficient; 75–250 nmol/L sufficient",
+    "ranges": {
+      "conventional": [
+        {
+          "population": "Deficient",
+          "low": null,
+          "high": 20,
+          "unit": "ng/mL"
+        },
+        {
+          "population": "Insufficient",
+          "low": 21,
+          "high": 29,
+          "unit": "ng/mL"
+        },
+        {
+          "population": "Sufficient",
+          "low": 30,
+          "high": 100,
+          "unit": "ng/mL"
+        },
+        {
+          "population": "Toxic",
+          "low": 150,
+          "high": null,
+          "unit": "ng/mL"
+        }
+      ],
+      "si": [
+        {
+          "population": "Deficient",
+          "low": null,
+          "high": 50,
+          "unit": "nmol/L"
+        },
+        {
+          "population": "Insufficient",
+          "low": 52,
+          "high": 72,
+          "unit": "nmol/L"
+        },
+        {
+          "population": "Sufficient",
+          "low": 75,
+          "high": 250,
+          "unit": "nmol/L"
+        },
+        {
+          "population": "Toxic",
+          "low": 374,
+          "high": null,
+          "unit": "nmol/L"
+        }
+      ]
+    },
+    "conversionFactor": 2.496,
+    "conversionNote": "ng/mL × 2.496 = nmol/L",
     "notes": "25-OH-D is the best marker of vitamin D status. Deficiency causes rickets (children), osteomalacia (adults)."
   },
   {
     "id": "urine_protein",
     "name": "Urine Protein",
     "category": "Urinalysis",
-    "aliases": ["proteinuria", "urinary protein"],
-    "ranges": [
-      { "population": "Normal (24-hr)", "low": 0, "high": 150, "unit": "mg/day" },
-      { "population": "Microalbuminuria (24-hr)", "low": 30, "high": 300, "unit": "mg/day" },
-      { "population": "Nephrotic range", "low": 3500, "high": null, "unit": "mg/day" }
+    "aliases": [
+      "proteinuria",
+      "urinary protein"
     ],
-    "siRange": "<150 mg/day normal",
+    "ranges": {
+      "conventional": [
+        {
+          "population": "Normal (24-hr)",
+          "low": 0,
+          "high": 150,
+          "unit": "mg/day"
+        },
+        {
+          "population": "Microalbuminuria (24-hr)",
+          "low": 30,
+          "high": 300,
+          "unit": "mg/day"
+        },
+        {
+          "population": "Nephrotic range",
+          "low": 3500,
+          "high": null,
+          "unit": "mg/day"
+        }
+      ],
+      "si": [
+        {
+          "population": "Normal (24-hr)",
+          "low": 0,
+          "high": 150,
+          "unit": "mg/day"
+        },
+        {
+          "population": "Microalbuminuria (24-hr)",
+          "low": 30,
+          "high": 300,
+          "unit": "mg/day"
+        },
+        {
+          "population": "Nephrotic range",
+          "low": 3500,
+          "high": null,
+          "unit": "mg/day"
+        }
+      ]
+    },
+    "conversionFactor": 1,
+    "conversionNote": "Same numeric values in both systems",
     "notes": "Spot urine protein:creatinine ratio >3.5 = nephrotic range."
   },
   {
     "id": "specific_gravity",
     "name": "Urine Specific Gravity",
     "category": "Urinalysis",
-    "aliases": ["USG", "urine specific gravity"],
-    "ranges": [
-      { "population": "Adult", "low": 1.005, "high": 1.030, "unit": "" }
+    "aliases": [
+      "USG",
+      "urine specific gravity"
     ],
-    "siRange": "1.005–1.030",
+    "ranges": {
+      "conventional": [
+        {
+          "population": "Adult",
+          "low": 1.005,
+          "high": 1.03,
+          "unit": ""
+        }
+      ],
+      "si": [
+        {
+          "population": "Adult",
+          "low": 1.005,
+          "high": 1.03,
+          "unit": ""
+        }
+      ]
+    },
+    "conversionFactor": 1,
+    "conversionNote": "Specific gravity is dimensionless",
     "notes": "Fixed SG 1.010 (isosthenuria) suggests renal tubular damage."
   }
 ]
